@@ -1,6 +1,9 @@
 # 2.76 TeV MB Hydjet production
 
-Required input: /Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/mnguyen-HydjetMB_2076GeV_740pre8_MCHI1_74_V3_53XBS_DIGI-RAW-357e79669a127c57ffb9feac23989f82/USER
+Required input: 
+```bash
+/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/mnguyen-HydjetMB_2076GeV_740pre8_MCHI1_74_V3_53XBS_DIGI-RAW-357e79669a127c57ffb9feac23989f82/USER
+```
 
 cmsDriver command:
 ```bash
@@ -19,5 +22,5 @@ Dataset location:
 
 Dataset expiry:
 
-after the heavy ion run or before
+after the 2015 heavy ion run or when no longer needed
 

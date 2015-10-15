@@ -14,9 +14,11 @@ currently submitted 500 jobs of 50 events each as requested by Austin for tracki
 
 Oct 10, 2015
 
-Dataset location:
+Dataset and location:
 
 ```bash
+/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/velicanu-HydjetMB_2076GeV_RECODEBUG_753p1-776179b16aca4791f871800c4d86d9a6/USER
+
 /mnt/hadoop/cms/store/user/velicanu/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HydjetMB_2076GeV_RECODEBUG_753p1/776179b16aca4791f871800c4d86d9a6
 ```
 

@@ -1,18 +1,18 @@
-# 2.76 TeV MB Hydjet production
+# 2.76 TeV deleted skim reco production - HLT_HISinglePhoton20 HLT_HISinglePhoton30
 
 Required input: 
 ```bash
-/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/mnguyen-HydjetMB_2076GeV_740pre8_MCHI1_74_V3_53XBS_DIGI-RAW-357e79669a127c57ffb9feac23989f82/USER
+/HIHighPt/dgulhan-HIHighPt_HIRun2011_HLT_HISinglePhoton20_HISinglePhoton30-94b0666b91c951da4a167e1b3165750b/USER
 ```
 
 cmsDriver command:
 ```bash
-cmsDriver.py step3 --conditions auto:run1_mc_hi -s RAW2DIGI,L1Reco,RECO -n 2 --eventcontent RECODEBUG --scenario HeavyIons --datatier GEN-SIM-RECO --beamspot RealisticHI2011Collision --filein file:step2.root --fileout file:step3.root --no_exec
+cmsDriver.py step3 --conditions auto:run1_data -s RAW2DIGI,L1Reco,RECO -n 2 --eventcontent RECO --scenario HeavyIons --datatier RECO --repacked --filein file:step2.root --fileout file:RECO.root --no_exec
 ```
 
-currently submitted 500 jobs of 50 events each as requested by Austin for tracking studies
+currently submitted 581 jobs on what's currently done
 
-Oct 10, 2015
+Oct 16, 2015
 
 Dataset and location:
 

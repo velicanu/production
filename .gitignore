@@ -1,7 +1,6 @@
 # CRAB files
-recoprod/crab_0_151015_174947/
-*/crab_0_*/*
-*/crab_0_*/*/*
+*.root
+*/crab_0_*
 */crab.history
 
 # Byte-compiled / optimized / DLL files

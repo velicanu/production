@@ -24,13 +24,13 @@ process.HiForest.HiForestVersion = cms.untracked.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-        "/store/user/velicanu/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HydjetMB_2076GeV_RECO_752_v0/491360cb3e793df4a41053d6d208a5a6/step3_1000_1_HYV.root"
+        "/store/user/velicanu/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HydjetMB_2076GeV_RECODEBUG_753p1/776179b16aca4791f871800c4d86d9a6/step3_100_1_78P.root"
 
     ))
 
 # Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1))
+    input = cms.untracked.int32(2))
 
 
 #####################################################################################
@@ -146,8 +146,8 @@ process.anaTrack.trackSrc = cms.InputTag("hiGeneralTracks")
 # clusters missing in recodebug - to be resolved
 process.pixelTrack.doPFMatching = False
 
-process.anaTrack.doSimVertex = False
-process.anaTrack.doSimTrack = False
+process.anaTrack.doSimVertex = True
+process.anaTrack.doSimTrack = True
 # process.ppTrack.fillSimTrack = True
 
 process.anaTrack.doPFMatching = True

@@ -1,6 +1,7 @@
 # CRAB files
 *.root
 */crab_0_*
+*/crab_*_*
 */crab.history
 
 # Byte-compiled / optimized / DLL files

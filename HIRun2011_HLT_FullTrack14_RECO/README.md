@@ -1,4 +1,4 @@
-# 2.76 TeV deleted skim reco production - HLT_HISinglePhoton20 HLT_HISinglePhoton30
+# 2.76 TeV deleted skim reco production - HLT_HIFullTrack14
 
 Required input: 
 ```bash
@@ -12,14 +12,14 @@ cmsDriver.py step3 --conditions auto:run1_data -s RAW2DIGI,L1Reco,RECO -n 2 --ev
 
 currently submitted 581 jobs on what's currently done
 
-Oct 16, 2015
+Oct 19, 2015
 
 Dataset and location:
 
 ```bash
-/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/velicanu-HydjetMB_2076GeV_RECODEBUG_753p1-776179b16aca4791f871800c4d86d9a6/USER
+UPDATE DATASET
 
-/mnt/hadoop/cms/store/user/velicanu/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HydjetMB_2076GeV_RECODEBUG_753p1/776179b16aca4791f871800c4d86d9a6
+UPDATE LOCATION
 ```
 
 Dataset expiry:

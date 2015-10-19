@@ -1,0 +1,705 @@
+crab:  Version 2.11.1_patch1 running on Sun Oct 18 19:48:55 2015 CET (17:48:55 UTC)
+
+crab. Working options:
+	scheduler           remoteGlidein
+	job type            CMSSW
+	server              OFF
+	working directory   /afs/cern.ch/work/v/velicanu/public/forest/prod/CMSSW_7_5_3_patch1/src/production/deletedhighptskim_reco/crab_0_151016_170618/
+
+crab:  PSN black list: T0,T1,TAPE,srm-cms.cern.ch,cmssrm.fnal.gov,T1_RU,T1_TW,cmseos.fnal.gov,cmsdca2.fnal.gov,T2_PK_NCP,T3_US_Vanderbilt_EC2
+crab:  Checking the status of all jobs: please wait
+crab:  
+ID    END STATUS            ACTION       ExeExitCode JobExitCode E_HOST
+----- --- ----------------- ------------  ---------- ----------- ---------
+1     Y   Done              Terminated    0          0           
+2     Y   Retrieved         Cleared       0          60307       
+3     Y   Retrieved         Cleared       0          60307       
+4     Y   Retrieved         Cleared       0          60307       
+5     Y   Retrieved         Cleared       0          60307       
+6     Y   Retrieved         Cleared       0          60307       
+7     Y   Retrieved         Cleared       0          60307       
+8     Y   Retrieved         Cleared       0          60307       
+9     Y   Retrieved         Cleared       0          60307       
+10    Y   Retrieved         Cleared       0          60307       
+--------------------------------------------------------------------------------
+11    Y   Retrieved         Cleared       0          60307       
+12    Y   Retrieved         Cleared       0          60307       
+13    Y   Done              Terminated    0          0           
+14    Y   Retrieved         Cleared       0          60307       
+15    Y   Retrieved         Cleared       0          60307       
+16    Y   Retrieved         Cleared       0          60307       
+17    Y   Retrieved         Cleared       0          60307       
+18    Y   Retrieved         Cleared       0          60307       
+19    Y   Retrieved         Cleared       0          60307       
+20    Y   Retrieved         Cleared       0          60307       
+--------------------------------------------------------------------------------
+21    Y   Retrieved         Cleared       0          60307       
+22    Y   Retrieved         Cleared       0          60307       
+23    Y   Retrieved         Cleared       0          60307       
+24    Y   Done              Terminated    0          0           
+25    Y   Retrieved         Cleared       0          60307       
+26    Y   Retrieved         Cleared       0          60307       
+27    Y   Retrieved         Cleared       0          60307       
+28    Y   Retrieved         Cleared       0          60307       
+29    Y   Retrieved         Cleared       0          60307       
+30    Y   Retrieved         Cleared       0          60307       
+--------------------------------------------------------------------------------
+31    Y   Retrieved         Cleared       0          60307       
+32    Y   Retrieved         Cleared       0          60307       
+33    Y   Done              Terminated    0          0           
+34    Y   Retrieved         Cleared       0          60307       
+35    Y   Retrieved         Cleared       0          60307       
+36    Y   Retrieved         Cleared       0          60307       
+37    Y   Retrieved         Cleared       0          60307       
+38    Y   Retrieved         Cleared       0          60307       
+39    Y   Retrieved         Cleared       0          60307       
+40    Y   Retrieved         Cleared       0          60307       
+--------------------------------------------------------------------------------
+41    Y   Retrieved         Cleared       0          60307       
+42    Y   Retrieved         Cleared       0          60307       
+43    Y   Retrieved         Cleared       0          60307       
+44    Y   Retrieved         Cleared       0          60307       
+45    Y   Retrieved         Cleared       0          60307       
+46    Y   Retrieved         Cleared       0          60307       
+47    Y   Retrieved         Cleared       0          60307       
+48    Y   Retrieved         Cleared       0          60307       
+49    Y   Done              Terminated    0          0           
+50    Y   Retrieved         Cleared       0          60307       
+--------------------------------------------------------------------------------
+51    Y   Retrieved         Cleared       0          60307       
+52    Y   Done              Terminated    0          0           
+53    Y   Retrieved         Cleared       0          60307       
+54    Y   Retrieved         Cleared       0          60307       
+55    Y   Done              Terminated    0          0           
+56    Y   Retrieved         Cleared       0          60307       
+57    Y   Done              Terminated    0          0           
+58    Y   Retrieved         Cleared       0          60307       
+59    Y   Done              Terminated    0          0           
+60    Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+61    Y   Done              Terminated    0          0           
+62    Y   Done              Terminated    0          0           
+63    Y   Done              Terminated    0          0           
+64    Y   Done              Terminated    0          0           
+65    Y   Done              Terminated    0          0           
+66    Y   Done              Terminated    11         50800       
+67    Y   Done              Terminated    0          0           
+68    Y   Done              Terminated    0          0           
+69    Y   Done              Terminated    0          0           
+70    Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+71    Y   Done              Terminated    0          0           
+72    Y   Done              Terminated    0          0           
+73    Y   Done              Terminated    0          0           
+74    Y   Done              Terminated    0          0           
+75    Y   Done              Terminated    0          0           
+76    Y   Done              Terminated    0          0           
+77    Y   Done              Terminated    0          60307       
+78    Y   Done              Terminated    0          0           
+79    Y   Retrieved         Cleared       8004       8004        
+80    Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+81    Y   Done              Terminated    0          60307       
+82    Y   Done              Terminated    0          0           
+83    Y   Done              Terminated    0          0           
+84    Y   Done              Terminated    0          0           
+85    Y   Done              Terminated    0          0           
+86    Y   Done              Terminated    0          0           
+87    Y   Done              Terminated    0          60307       
+88    Y   Done              Terminated    0          0           
+89    Y   Done              Terminated    0          0           
+90    Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+91    Y   Done              Terminated    0          0           
+92    Y   Done              Terminated    0          0           
+93    Y   Done              Terminated    0          0           
+94    Y   Done              Terminated    0          60307       
+95    Y   Done              Terminated    0          0           
+96    Y   Done              Terminated    0          0           
+97    Y   Done              Terminated    0          0           
+98    Y   Done              Terminated    0          0           
+99    Y   Done              Terminated    0          0           
+100   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+101   Y   Done              Terminated    0          0           
+102   Y   Done              Terminated    0          0           
+103   Y   Done              Terminated    0          0           
+104   Y   Done              Terminated    0          0           
+105   Y   Done              Terminated    0          0           
+106   Y   Done              Terminated    143        50664       
+107   Y   Done              Terminated    0          0           
+108   Y   Done              Terminated    0          0           
+109   Y   Done              Terminated    0          0           
+110   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+111   Y   Done              Terminated    0          0           
+112   Y   Done              Terminated    0          0           
+113   Y   Done              Terminated    0          0           
+114   Y   Done              Terminated    0          0           
+115   Y   Done              Terminated    0          0           
+116   Y   Done              Terminated    0          0           
+117   Y   Done              Terminated    0          0           
+118   Y   Done              Terminated    0          0           
+119   Y   Done              Terminated    0          0           
+120   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+121   Y   Done              Terminated    0          0           
+122   Y   Done              Terminated    0          0           
+123   Y   Done              Terminated    0          0           
+124   Y   Done              Terminated    0          0           
+125   Y   Done              Terminated    0          0           
+126   Y   Done              Terminated    0          0           
+127   Y   Done              Terminated    0          0           
+128   Y   Done              Terminated    0          0           
+129   Y   Done              Terminated    11         50800       
+130   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+131   Y   Done              Terminated    0          60317       
+132   Y   Done              Terminated    0          0           
+133   Y   Done              Terminated    0          0           
+134   Y   Done              Terminated    0          0           
+135   Y   Done              Terminated    0          0           
+136   Y   Done              Terminated    0          0           
+137   Y   Done              Terminated    0          0           
+138   Y   Done              Terminated    0          0           
+139   Y   Done              Terminated    0          0           
+140   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+141   Y   Done              Terminated    0          0           
+142   Y   Done              Terminated    11         50800       
+143   Y   Done              Terminated    0          0           
+144   Y   Done              Terminated    0          0           
+145   Y   Done              Terminated    0          0           
+146   Y   Done              Terminated    0          0           
+147   Y   Done              Terminated    0          0           
+148   Y   Done              Terminated    0          0           
+149   Y   Done              Terminated    0          0           
+150   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+151   Y   Done              Terminated    0          0           
+152   Y   Done              Terminated    0          0           
+153   Y   Done              Terminated    0          0           
+154   Y   Done              Terminated    0          0           
+155   Y   Done              Terminated    0          0           
+156   Y   Done              Terminated    0          0           
+157   Y   Done              Terminated    0          0           
+158   Y   Done              Terminated    0          0           
+159   Y   Done              Terminated    0          0           
+160   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+161   Y   Done              Terminated    0          0           
+162   Y   Done              Terminated    0          0           
+163   Y   Done              Terminated    0          0           
+164   Y   Done              Terminated    0          0           
+165   Y   Done              Terminated    0          0           
+166   Y   Done              Terminated    0          0           
+167   Y   Done              Terminated    0          0           
+168   Y   Done              Terminated    0          0           
+169   Y   Done              Terminated    143        50664       
+170   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+171   Y   Done              Terminated    0          0           
+172   Y   Done              Terminated    0          0           
+173   Y   Done              Terminated    0          0           
+174   Y   Done              Terminated    0          0           
+175   Y   Done              Terminated    0          0           
+176   Y   Done              Terminated    0          0           
+177   Y   Done              Terminated    0          0           
+178   Y   Done              Terminated    0          0           
+179   Y   Done              Terminated    0          0           
+180   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+181   Y   Done              Terminated    0          0           
+182   Y   Done              Terminated    0          0           
+183   Y   Done              Terminated    0          0           
+184   Y   Done              Terminated    0          0           
+185   Y   Done              Terminated    0          0           
+186   Y   Done              Terminated    0          0           
+187   Y   Done              Terminated    0          0           
+188   Y   Done              Terminated    0          0           
+189   Y   Done              Terminated    11         50800       
+190   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+191   Y   Done              Terminated    0          0           
+192   Y   Done              Terminated    0          0           
+193   Y   Retrieved         Cleared       8004       8004        
+194   Y   Done              Terminated    0          0           
+195   Y   Done              Terminated    0          0           
+196   Y   Done              Terminated    0          0           
+197   Y   Done              Terminated    0          0           
+198   Y   Done              Terminated    0          0           
+199   Y   Done              Terminated    0          60307       
+200   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+201   Y   Done              Terminated    0          0           
+202   Y   Done              Terminated    0          0           
+203   Y   Done              Terminated    0          0           
+204   Y   Done              Terminated    0          0           
+205   Y   Done              Terminated    0          0           
+206   Y   Done              Terminated    0          0           
+207   Y   Done              Terminated    0          0           
+208   Y   Done              Terminated    0          0           
+209   Y   Done              Terminated    0          0           
+210   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+211   Y   Done              Terminated    0          0           
+212   Y   Done              Terminated    0          0           
+213   Y   Done              Terminated    0          0           
+214   Y   Done              Terminated    0          0           
+215   Y   Done              Terminated    0          0           
+216   Y   Done              Terminated    0          0           
+217   Y   Done              Terminated    0          0           
+218   Y   Done              Terminated    0          0           
+219   Y   Done              Terminated    0          60307       
+220   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+221   Y   Done              Terminated    0          0           
+222   Y   Done              Terminated    0          0           
+223   Y   Done              Terminated    0          0           
+224   Y   Done              Terminated    0          60307       
+225   Y   Done              Terminated    0          0           
+226   Y   Done              Terminated    143        50664       
+227   Y   Done              Terminated    0          0           
+228   Y   Done              Terminated    0          0           
+229   Y   Done              Terminated    0          0           
+230   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+231   Y   Done              Terminated    0          0           
+232   Y   Done              Terminated    0          0           
+233   Y   Done              Terminated    0          0           
+234   Y   Done              Terminated    0          0           
+235   Y   Done              Terminated    0          0           
+236   Y   Done              Terminated    0          0           
+237   Y   Done              Terminated    0          0           
+238   Y   Done              Terminated    0          0           
+239   Y   Done              Terminated    0          0           
+240   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+241   Y   Done              Terminated    0          0           
+242   Y   Done              Terminated    0          0           
+243   Y   Done              Terminated    0          0           
+244   Y   Done              Terminated    0          0           
+245   Y   Done              Terminated    0          0           
+246   Y   Done              Terminated    0          0           
+247   Y   Done              Terminated    0          0           
+248   Y   Done              Terminated    0          0           
+249   Y   Done              Terminated    0          0           
+250   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+251   Y   Done              Terminated    0          0           
+252   Y   Done              Terminated    0          0           
+253   Y   Done              Terminated    0          0           
+254   Y   Done              Terminated    0          0           
+255   Y   Done              Terminated    0          0           
+256   Y   Done              Terminated    0          0           
+257   Y   Done              Terminated    0          0           
+258   Y   Done              Terminated    0          0           
+259   Y   Done              Terminated    0          0           
+260   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+261   Y   Done              Terminated    0          0           
+262   Y   Done              Terminated    0          0           
+263   Y   Done              Terminated    0          60307       
+264   Y   Done              Terminated    0          0           
+265   Y   Done              Terminated    0          0           
+266   Y   Done              Terminated    0          0           
+267   Y   Done              Terminated    0          0           
+268   Y   Done              Terminated    0          0           
+269   Y   Done              Terminated    0          0           
+270   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+271   Y   Done              Terminated    0          0           
+272   Y   Done              Terminated    0          0           
+273   Y   Done              Terminated    0          0           
+274   Y   Done              Terminated    0          0           
+275   Y   Done              Terminated    0          0           
+276   Y   Done              Terminated    0          0           
+277   Y   Done              Terminated    0          50664       
+278   Y   Done              Terminated    0          0           
+279   Y   Done              Terminated    0          0           
+280   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+281   Y   Done              Terminated    0          0           
+282   Y   Done              Terminated    0          0           
+283   Y   Done              Terminated    0          0           
+284   Y   Done              Terminated    0          0           
+285   Y   Done              Terminated    0          0           
+286   Y   Done              Terminated    0          0           
+287   Y   Done              Terminated    0          0           
+288   Y   Done              Terminated    0          0           
+289   Y   Done              Terminated    0          0           
+290   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+291   Y   Done              Terminated    0          0           
+292   Y   Done              Terminated    0          0           
+293   Y   Done              Terminated    0          0           
+294   Y   Done              Terminated    0          0           
+295   Y   Done              Terminated    0          0           
+296   Y   Done              Terminated    0          0           
+297   Y   Done              Terminated    0          60317       
+298   Y   Retrieved         Cleared       8004       8004        
+299   Y   Done              Terminated    0          0           
+300   Y   Done              Terminated    0          60307       
+--------------------------------------------------------------------------------
+301   Y   Done              Terminated    0          0           
+302   Y   Done              Terminated    0          0           
+303   Y   Done              Terminated    0          0           
+304   Y   Done              Terminated    0          0           
+305   Y   Done              Terminated    0          0           
+306   Y   Done              Terminated    0          0           
+307   Y   Done              Terminated    0          0           
+308   Y   Done              Terminated    0          0           
+309   Y   Done              Terminated    0          0           
+310   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+311   Y   Done              Terminated    143        50664       
+312   Y   Done              Terminated    0          0           
+313   Y   Done              Terminated    0          0           
+314   Y   Done              Terminated    11         50800       
+315   Y   Done              Terminated    0          0           
+316   Y   Done              Terminated    0          0           
+317   Y   Done              Terminated    0          0           
+318   Y   Done              Terminated    0          0           
+319   Y   Done              Terminated    0          0           
+320   Y   Done              Terminated    143        50664       
+--------------------------------------------------------------------------------
+321   Y   Done              Terminated    0          0           
+322   Y   Done              Terminated    0          0           
+323   Y   Done              Terminated    0          0           
+324   Y   Done              Terminated    0          0           
+325   Y   Done              Terminated    0          0           
+326   Y   Done              Terminated    0          0           
+327   Y   Done              Terminated    0          60317       
+328   Y   Done              Terminated    0          0           
+329   Y   Done              Terminated    0          0           
+330   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+331   Y   Done              Terminated    0          0           
+332   Y   Done              Terminated    0          0           
+333   Y   Done              Terminated    0          0           
+334   Y   Done              Terminated    0          0           
+335   Y   Done              Terminated    0          0           
+336   Y   Done              Terminated    0          0           
+337   Y   Done              Terminated    0          0           
+338   Y   Done              Terminated    0          0           
+339   Y   Done              Terminated    0          0           
+340   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+341   Y   Done              Terminated    0          0           
+342   Y   Done              Terminated    0          0           
+343   Y   Done              Terminated    143        50664       
+344   Y   Done              Terminated    0          0           
+345   Y   Done              Terminated    0          0           
+346   Y   Done              Terminated    0          0           
+347   Y   Done              Terminated    0          0           
+348   Y   Done              Terminated    0          0           
+349   Y   Done              Terminated    0          0           
+350   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+351   Y   Done              Terminated    0          0           
+352   Y   Done              Terminated    0          0           
+353   Y   Done              Terminated    0          0           
+354   Y   Done              Terminated    0          0           
+355   Y   Done              Terminated    0          0           
+356   Y   Done              Terminated    0          0           
+357   Y   Done              Terminated    0          0           
+358   Y   Done              Terminated    0          60317       
+359   Y   Done              Terminated    0          0           
+360   Y   Done              Terminated    143        50664       
+--------------------------------------------------------------------------------
+361   Y   Done              Terminated    0          0           
+362   Y   Done              Terminated    0          0           
+363   Y   Done              Terminated    0          0           
+364   Y   Done              Terminated    143        50664       
+365   Y   Done              Terminated    0          0           
+366   Y   Done              Terminated    0          0           
+367   Y   Done              Terminated    0          0           
+368   Y   Done              Terminated    0          0           
+369   Y   Done              Terminated    0          0           
+370   Y   Done              Terminated    143        50664       
+--------------------------------------------------------------------------------
+371   Y   Done              Terminated    0          0           
+372   Y   Done              Terminated    0          0           
+373   Y   Done              Terminated    0          0           
+374   Y   Done              Terminated    11         50800       
+375   Y   Done              Terminated    0          0           
+376   Y   Done              Terminated    0          0           
+377   Y   Done              Terminated    143        50664       
+378   Y   Done              Terminated    143        50664       
+379   Y   Done              Terminated    11         50800       
+380   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+381   Y   Done              Terminated    0          0           
+382   Y   Done              Terminated    143        50664       
+383   Y   Done              Terminated    0          0           
+384   Y   Done              Terminated    143        50664       
+385   Y   Done              Terminated    0          0           
+386   Y   Done              Terminated    0          0           
+387   Y   Done              Terminated    0          0           
+388   Y   Done              Terminated    143        50664       
+389   Y   Done              Terminated    0          0           
+390   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+391   Y   Done              Terminated    0          0           
+392   Y   Done              Terminated    0          0           
+393   Y   Done              Terminated    143        50664       
+394   Y   Done              Terminated    0          0           
+395   Y   Done              Terminated    0          0           
+396   Y   Done              Terminated    0          0           
+397   Y   Done              Terminated    0          0           
+398   Y   Done              Terminated    0          0           
+399   Y   Done              Terminated    0          0           
+400   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+401   Y   Done              Terminated    0          60317       
+402   Y   Done              Terminated    0          0           
+403   Y   Done              Terminated    0          0           
+404   Y   Done              Terminated    143        50660       
+405   Y   Done              Terminated    0          0           
+406   Y   Done              Terminated    8021       8021        
+407   Y   Done              Terminated    0          0           
+408   Y   Done              Terminated    0          0           
+409   Y   Done              Terminated    0          60317       
+410   Y   Done              Terminated    0          60317       
+--------------------------------------------------------------------------------
+411   Y   Done              Terminated    0          0           
+412   Y   Done              Terminated    0          60317       
+413   Y   Done              Terminated    0          60317       
+414   Y   Done              Terminated    0          60307       
+415   Y   Done              Terminated    8004       8004        
+416   Y   Done              Terminated    0          0           
+417   Y   Done              Terminated    0          0           
+418   Y   Done              Terminated    0          0           
+419   Y   Done              Terminated    143        50664       
+420   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+421   Y   Done              Terminated    0          0           
+422   Y   Done              Terminated    143        50664       
+423   Y   Done              Terminated    0          0           
+424   Y   Done              Terminated    0          0           
+425   Y   Done              Terminated    0          0           
+426   Y   Done              Terminated    0          0           
+427   Y   Done              Terminated    0          0           
+428   Y   Done              Terminated    0          0           
+429   Y   Done              Terminated    0          0           
+430   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+431   Y   Done              Terminated    0          0           
+432   Y   Done              Terminated    143        50664       
+433   Y   Done              Terminated    0          0           
+434   Y   Done              Terminated    0          0           
+435   Y   Done              Terminated    0          0           
+436   Y   Done              Terminated    0          0           
+437   Y   Done              Terminated    0          0           
+438   Y   Done              Terminated    0          0           
+439   Y   Done              Terminated    0          0           
+440   Y   Retrieved         Cleared       143        50660       
+--------------------------------------------------------------------------------
+441   Y   Done              Terminated    0          0           
+442   Y   Done              Terminated    0          0           
+443   Y   Done              Terminated    0          0           
+444   Y   Retrieved         Cleared       8004       8004        
+445   Y   Done              Terminated    0          0           
+446   Y   Done              Terminated    0          0           
+447   Y   Done              Terminated    0          0           
+448   Y   Done              Terminated    0          0           
+449   Y   Done              Terminated    0          0           
+450   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+451   Y   Done              Terminated    143        50664       
+452   Y   Done              Terminated    0          0           
+453   Y   Done              Terminated    143        50664       
+454   Y   Done              Terminated    0          0           
+455   Y   Done              Terminated    143        50660       
+456   Y   Done              Terminated    0          0           
+457   Y   Done              Terminated    0          0           
+458   Y   Done              Terminated    0          0           
+459   Y   Done              Terminated    0          0           
+460   Y   Retrieved         Cleared       11         50800       
+--------------------------------------------------------------------------------
+461   Y   Done              Terminated    0          0           
+462   Y   Done              Terminated    0          0           
+463   Y   Done              Terminated    0          0           
+464   Y   Done              Terminated    0          0           
+465   Y   Done              Terminated    0          0           
+466   Y   Done              Terminated    8028       8028        
+467   Y   Done              Terminated    0          0           
+468   Y   Done              Terminated    0          0           
+469   Y   Done              Terminated    0          60317       
+470   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+471   Y   Done              Terminated    143        50664       
+472   Y   Done              Terminated    143        50664       
+473   Y   Done              Terminated    0          0           
+474   Y   Done              Terminated    0          0           
+475   Y   Done              Terminated    11         50800       
+476   Y   Done              Terminated    0          0           
+477   Y   Retrieved         Cleared       8021       8021        
+478   Y   Done              Terminated    0          0           
+479   Y   Done              Terminated    0          60317       
+480   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+481   Y   Done              Terminated    0          0           
+482   Y   Done              Terminated    143        50664       
+483   Y   Done              Terminated    0          0           
+484   Y   Done              Terminated    0          0           
+485   Y   Done              Terminated    143        50664       
+486   Y   Done              Terminated    0          0           
+487   Y   Done              Terminated    0          0           
+488   Y   Done              Terminated    0          0           
+489   Y   Done              Terminated    0          0           
+490   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+491   Y   Done              Terminated    0          0           
+492   Y   Done              Terminated    0          0           
+493   Y   Done              Terminated    143        50664       
+494   Y   Done              Terminated    0          0           
+495   Y   Done              Terminated    0          0           
+496   Y   Done              Terminated    8004       8004        
+497   Y   Done              Terminated    0          0           
+498   Y   Done              Terminated    0          0           
+499   Y   Done              Terminated    0          0           
+500   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+501   Y   Done              Terminated    0          60307       
+502   Y   Done              Terminated    0          60317       
+503   Y   Done              Terminated    0          0           
+504   Y   Done              Terminated    0          0           
+505   Y   Done              Terminated    0          0           
+506   Y   Done              Terminated    0          0           
+507   Y   Done              Terminated    0          0           
+508   Y   Done              Terminated    0          0           
+509   Y   Done              Terminated    0          0           
+510   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+511   Y   Done              Terminated    0          0           
+512   Y   Done              Terminated    0          0           
+513   Y   Done              Terminated    0          0           
+514   Y   Done              Terminated    0          0           
+515   Y   Done              Terminated    0          60307       
+516   Y   Done              Terminated    0          0           
+517   Y   Done              Terminated    0          0           
+518   Y   Done              Terminated    0          0           
+519   Y   Done              Terminated    0          0           
+520   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+521   Y   Done              Terminated    0          0           
+522   Y   Done              Terminated    0          0           
+523   Y   Done              Terminated    0          0           
+524   Y   Done              Terminated    0          60317       
+525   Y   Done              Terminated    0          60317       
+526   Y   Done              Terminated    0          60317       
+527   Y   Done              Terminated    143        50664       
+528   Y   Done              Terminated    0          0           
+529   Y   Done              Terminated    143        50664       
+530   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+531   Y   Done              Terminated    8004       8004        
+532   Y   Done              Terminated    0          0           
+533   Y   Done              Terminated    0          0           
+534   Y   Done              Terminated    143        50664       
+535   Y   Done              Terminated    0          0           
+536   Y   Done              Terminated    0          0           
+537   Y   Done              Terminated    143        50660       
+538   Y   Retrieved         Cleared       143        50660       
+539   Y   Done              Terminated    11         50800       
+540   Y   Done              Terminated    143        50664       
+--------------------------------------------------------------------------------
+541   Y   Done              Terminated    143        50664       
+542   Y   Done              Terminated    0          0           
+543   Y   Done              Terminated    0          0           
+544   Y   Done              Terminated    0          0           
+545   Y   Done              Terminated    143        50664       
+546   Y   Done              Terminated    143        50664       
+547   Y   Done              Terminated    0          60317       
+548   Y   Done              Terminated    8004       8004        
+549   Y   Done              Terminated    0          0           
+550   Y   Done              Terminated    8004       8004        
+--------------------------------------------------------------------------------
+551   Y   Done              Terminated    143        50664       
+552   Y   Done              Terminated    143        50664       
+553   Y   Done              Terminated    143        50664       
+554   Y   Done              Terminated    143        50664       
+555   Y   Done              Terminated    0          0           
+556   Y   Done              Terminated    143        50664       
+557   Y   Done              Terminated    0          0           
+558   Y   Done              Terminated    0          0           
+559   Y   Done              Terminated    0          0           
+560   Y   Done              Terminated    11         50800       
+--------------------------------------------------------------------------------
+561   Y   Done              Terminated    0          0           
+562   Y   Done              Terminated    0          0           
+563   Y   Done              Terminated    0          60317       
+564   Y   Done              Terminated    143        50664       
+565   Y   Done              Terminated    0          0           
+566   Y   Done              Terminated    0          0           
+567   Y   Done              Terminated    0          0           
+568   Y   Done              Terminated    8004       8004        
+569   Y   Done              Terminated    143        50664       
+570   Y   Done              Terminated    143        50664       
+--------------------------------------------------------------------------------
+571   Y   Retrieved         Cleared       8021       8021        
+572   Y   Done              Terminated    143        50664       
+573   Y   Retrieved         Cleared       8021       8021        
+574   Y   Retrieved         Cleared       8021       8021        
+575   Y   Retrieved         Cleared       8021       8021        
+576   Y   Done              Terminated    143        50664       
+577   Y   Done              Terminated    143        50664       
+578   Y   Done              Terminated    0          0           
+579   Y   Done              Terminated    143        50664       
+580   Y   Done              Terminated    0          0           
+--------------------------------------------------------------------------------
+581   Y   Done              Terminated    0          0           
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 5 Jobs with Wrapper Exit Code : 50660 
+	 List of jobs: 404,440,455,537-538 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 45 Jobs with Wrapper Exit Code : 50664 
+	 List of jobs: 106,169,226,277,311,320,343,360,364,370,377-378,382,384,388,393,419,422,432,451,453,471-472,482,485,493,527,529,534,540-541,545-546,551-554,556,564,569-570,572,576-577,579 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 17 Jobs with Wrapper Exit Code : 60317 
+	 List of jobs: 131,297,327,358,401,409-410,412-413,469,479,502,524-526,547,563 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 62 Jobs with Wrapper Exit Code : 60307 
+	 List of jobs: 2-12,14-23,25-32,34-48,50-51,53-54,56,58,77,81,87,94,199,219,224,263,300,414,501,515 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 424 Jobs with Wrapper Exit Code : 0 
+	 List of jobs: 13,24,33,49,52,55,57,59-65,67-76,78,80,82-86,88-93,95-105,107-128,130,132-141,143-168,170-188,190-192,194-198,200-218,220-223,225,227-262,264-276,278-296,299,301-310,312-313,315-319,321-326,328-342,344-357,359,361-363,365-369,371-373,375-376,380-381,383,385-387,389-392,394-400,402-403,405,407-408,411,416-418,420-421,423-431,433-439,441-443,445-450,452,454,456-459,461-465,467-468,470,473-474,476,478,480-481,483-484,486-492,494-495,497-500,503-514,516-523,528,530,532-533,535-536,542-544,549,555,557-559,561-562,565-567,578,580-581,1 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 1 Jobs with Wrapper Exit Code : 8028 
+	 List of jobs: 466 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 10 Jobs with Wrapper Exit Code : 8004 
+	 List of jobs: 79,193,298,415,444,496,531,548,550,568 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 11 Jobs with Wrapper Exit Code : 50800 
+	 List of jobs: 66,129,142,189,314,374,379,460,475,539,560 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:  ExitCodes Summary
+ >>>>>>>>> 6 Jobs with Wrapper Exit Code : 8021 
+	 List of jobs: 406,477,571,573-575 
+	See https://twiki.cern.ch/twiki/bin/view/CMSPublic/JobExitCodes for Exit Code meaning
+
+crab:   581 Total Jobs 
+
+crab:  You can also follow the status of this task on :
+	CMS Dashboard: http://dashb-cms-job-task.cern.ch/taskmon.html#task=velicanu_crab_0_151016_170618_8y0r5w
+	Your task name is: velicanu_crab_0_151016_170618_8y0r5w 
+
+Log file is /afs/cern.ch/work/v/velicanu/public/forest/prod/CMSSW_7_5_3_patch1/src/production/deletedhighptskim_reco/crab_0_151016_170618/log/crab.log

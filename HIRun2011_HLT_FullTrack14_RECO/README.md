@@ -2,7 +2,7 @@
 
 Required input: 
 ```bash
-/HIHighPt/dgulhan-HIHighPt_HIRun2011_HLT_HISinglePhoton20_HISinglePhoton30-94b0666b91c951da4a167e1b3165750b/USER
+/HIHighPt/dgulhan-HIHighPt_HIRun2011_HLT_HIFullTrack14-9a51de932e7ef7c4280ba90e9fc423d7/USER
 ```
 
 cmsDriver command:

@@ -17,9 +17,9 @@ Oct 16, 2015
 Dataset and location:
 
 ```bash
-/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/velicanu-HydjetMB_2076GeV_RECODEBUG_753p1-776179b16aca4791f871800c4d86d9a6/USER
+/HIHighPt/velicanu-HIHighPt_HIRun2011_HLT_HISinglePhoton20_HISinglePhoton30_RECO_753p1-fd44351629dd155a25de2b4c109c824c/USER
 
-/mnt/hadoop/cms/store/user/velicanu/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HydjetMB_2076GeV_RECODEBUG_753p1/776179b16aca4791f871800c4d86d9a6
+/mnt/hadoop/cms/store/user/velicanu/HIHighPt/HIHighPt_HIRun2011_HLT_HISinglePhoton20_HISinglePhoton30_RECO_753p1/fd44351629dd155a25de2b4c109c824c
 ```
 
 Dataset expiry:

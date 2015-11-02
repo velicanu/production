@@ -1,8 +1,10 @@
 # Embedded production 
 
-Auto pt-hat usage (with 15 - 30 for example):
+Auto pt-hat usage (with pthat 15 for example):
 ```bash
-./pthat.sh 15 30 crabConfig.py QCD_TuneCUETP8M1_cfi_GEN_SIM.py
+./pthat.sh 15 crabConfig.py QCD_TuneCUETP8M1_cfi_GEN_SIM.py
+cd QCD_TuneCUETP8M1_cfi_GEN_SIM_15
+crab submit -c crabConfig.py
 ```
 
 Required input: 

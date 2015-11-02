@@ -1,5 +1,10 @@
 # Embedded production 
 
+Auto pt-hat usage:
+```bash
+./pthat.sh 15 30 crabConfig.py QCD_TuneCUETP8M1_cfi_GEN_SIM.py
+```
+
 Required input: 
 ```bash
 /Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM

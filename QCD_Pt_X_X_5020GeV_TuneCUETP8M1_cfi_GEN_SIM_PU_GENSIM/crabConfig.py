@@ -3,7 +3,7 @@ config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
 config.section_('JobType')
-config.JobType.psetName = 'QCD_TuneCUETP8M1_cfi_GEN_SIM_PTMINFLAG___PTMAXFLAG_.py'
+config.JobType.psetName = 'QCD_TuneCUETP8M1_cfi_GEN_SIM__PTMINFLAG_.py'
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.inputFiles = ['rssLimit']
 config.JobType.outputFiles = ['step1.root']

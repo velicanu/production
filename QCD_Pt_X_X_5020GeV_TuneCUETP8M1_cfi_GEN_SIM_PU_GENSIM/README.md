@@ -1,18 +1,18 @@
-# 2.76 TeV deleted skim reco production - HLT_HIFullTrack14
+# Embedded production 
 
 Required input: 
 ```bash
-/HIHighPt/dgulhan-HIHighPt_HIRun2011_HLT_HIFullTrack14-9a51de932e7ef7c4280ba90e9fc423d7/USER
+/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM
 ```
 
 cmsDriver command:
 ```bash
-cmsDriver.py step3 --conditions auto:run1_data -s RAW2DIGI,L1Reco,RECO -n 2 --eventcontent RECO --scenario HeavyIons --datatier RECO --repacked --filein file:step2.root --fileout file:RECO.root --no_exec
+cmsDriver.py QCD_Pt_600_800_8TeV_TuneCUETP8M1_cfi --conditions 75X_mcRun2_HeavyIon_v1 -s GEN,SIM --pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM -n 10 --eventcontent FEVTDEBUG --scenario HeavyIons --pileup HiMixGEN --datatier GEN-SIM --beamspot MatchHI --fileout file:step1.root --pileup_dasoption "--limit 0" --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI,Configuration/DataProcessing/Utils.addMonitoring --no_exec
 ```
 
-currently submitted 581 jobs on what's currently done
 
-Oct 19, 2015
+
+Nov 2, 2015
 
 Dataset and location:
 

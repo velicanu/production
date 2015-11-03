@@ -3,19 +3,18 @@ config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
 config.section_('JobType')
-config.JobType.psetName = 'QCD_TuneCUETP8M1_cfi_GEN_SIM__PTMINFLAG_.py'
-config.JobType.pluginName = 'PrivateMC'
+config.JobType.psetName = '_PSETFLAG_'
+config.JobType.pluginName = 'Analysis'
 config.JobType.inputFiles = ['rssLimit']
-config.JobType.outputFiles = ['step1.root']
+config.JobType.outputFiles = ['step2.root']
 config.section_('Data')
-config.Data.primaryDataset = 'PYTHIA_QCD_TuneCUETP8M1_cfi_GEN_SIM_5020GeV'
-config.Data.splitting = 'EventBased'
+config.Data.inputDataset = '_DATASETFLAG_'
+config.Data.inputDBS = 'phys03'
+config.Data.splitting = "FileBased"
+config.Data.unitsPerJob = 1
+config.Data.totalUnits = -1
 config.Data.publication = True
-config.Data.unitsPerJob = 100
-NJOBS = 3000
-config.Data.totalUnits = config.Data.unitsPerJob * NJOBS
-# config.Data.publishDataName = 'QCD_TuneCUETP8M1_cfi_GEN_SIM'
-config.Data.publishDataName = 'Pythia8_Dijet_PTMINFLAG__pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_PrivMC'
+config.Data.publishDataName = 'Pythia8_Dijet_PTMINFLAG__pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_DIGIRAW_PrivMC'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

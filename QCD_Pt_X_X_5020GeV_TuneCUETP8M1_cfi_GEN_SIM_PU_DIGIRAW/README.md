@@ -2,8 +2,8 @@
 
 Auto pt-hat usage (with pthat 15 for example):
 ```bash
-./pthat.sh 15 crabConfig.py QCD_TuneCUETP8M1_cfi_GEN_SIM.py
-cd QCD_TuneCUETP8M1_cfi_GEN_SIM_15
+./pthat.sh crabConfig.py step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_PU.py datasets.txt
+cd step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_PU_15
 crab submit -c crabConfig.py
 ```
 

@@ -29,6 +29,9 @@ Dataset and location:
 /PYTHIA_QCD_TuneCUETP8M1_cfi_GEN_SIM_5020GeV/velicanu-Pythia8_Dijet50_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_PrivMC-e63a4177030cf1877d777a03f8360e0e/USER
 /PYTHIA_QCD_TuneCUETP8M1_cfi_GEN_SIM_5020GeV/velicanu-Pythia8_Dijet80_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_PrivMC-282baa650b1997daa0dd8689f6a69785/USER
 /PYTHIA_QCD_TuneCUETP8M1_cfi_GEN_SIM_5020GeV/velicanu-Pythia8_Dijet120_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_PrivMC-0ec5ca09bf4a25cb4bbd0b389cd6a67c/USER
+
+# Stored at MIT
+/mnt/hadoop/cms/store/user/velicanu/PYTHIA_QCD_TuneCUETP8M1_cfi_GEN_SIM_5020GeV
 ```
 
 Dataset expiry:

@@ -7,10 +7,7 @@ cd step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_PU_15
 crab submit -c crabConfig.py
 ```
 
-Required input: 
-```bash
-/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM
-```
+Required input: see datasets.txt
 
 cmsDriver command:
 ```bash

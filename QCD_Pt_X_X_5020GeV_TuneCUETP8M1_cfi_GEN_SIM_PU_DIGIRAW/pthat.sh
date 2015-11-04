@@ -13,7 +13,7 @@ for i in `seq 0 10`
   rm -rf ${basename}_${pthats[$((i))]}  
   dataset=`cat $3 | head -n$((i+1)) | tail -n1`
   mkdir ${basename}_${pthats[$((i))]}  
-  sed "s/_PTMINFLAG_/${1}/g ; s@_DATASETFLAG_@${dataset}@g ; s/_PSETFLAG_/${2}/g " $1 > ${basename}_${pthats[$((i))]}/$1
+  sed "s/_PTMINFLAG_/${pthats[$((i))]}/g ; s@_DATASETFLAG_@${dataset}@g ; s/_PSETFLAG_/${2}/g " $1 > ${basename}_${pthats[$((i))]}/$1
   # sed "s/_PTMINFLAG_/${1}/g" $2 > ${basename}_${pthats[$((i))]}/${basename}_${pthats[$((i))]}.py
   cp $2 ${basename}_${pthats[$((i))]}
   cp rssLimit ${basename}_${pthats[$((i))]}

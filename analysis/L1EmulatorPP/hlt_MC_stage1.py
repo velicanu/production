@@ -9294,7 +9294,7 @@ _customInfo['inputFiles'][True]  = "file:RelVal_Raw_GRun_DATA.root"
 _customInfo['inputFiles'][False] = "file:RelVal_Raw_GRun_MC.root"
 _customInfo['maxEvents' ]=  50
 _customInfo['globalTag' ]= "75X_mcRun2_HeavyIon_v6"
-_customInfo['inputFile' ]=  ['_inputfileflag_']
+_customInfo['inputFile' ]=  ['/store/user/twang/MinBias_TuneCUETP8M1_5p02TeV-pythia8/MinBias_TuneCUETP8M1_5p02TeV_pythia8_pp502Fall15_MCRUN2_71_V1_v1_step2_CMSSW_7_4_15_20151105/792724e95bc6b3667ad91f57fcdd4eac/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_1000_2_mqi.root']
 _customInfo['realData'  ]=  False
 from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
 process = customizeHLTforAll(process,_customInfo)

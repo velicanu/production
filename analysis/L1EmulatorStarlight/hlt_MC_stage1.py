@@ -9294,7 +9294,7 @@ _customInfo['inputFiles'][True]  = "file:RelVal_Raw_GRun_DATA.root"
 _customInfo['inputFiles'][False] = "file:RelVal_Raw_GRun_MC.root"
 _customInfo['maxEvents' ]=  50
 _customInfo['globalTag' ]= "75X_mcRun2_HeavyIon_v6"
-_customInfo['inputFile' ]=  ['_inputfileflag_']
+_customInfo['inputFile' ]=  ['/store/user/kjung/STARLIGHTProd/STARLIGHT_RAW_kjung_100kTest/151023_200909/0000/Starlight_RAW_prod1_1.root']
 _customInfo['realData'  ]=  False
 from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
 process = customizeHLTforAll(process,_customInfo)

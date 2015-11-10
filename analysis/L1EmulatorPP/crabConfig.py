@@ -12,8 +12,8 @@ config.JobType.pluginName = 'Analysis'
 config.JobType.maxMemoryMB = 3500 #default 2000
 config.JobType.outputFiles = ['openHLT.root']
 config.section_('Data')
-config.Data.inputDataset = '/STARLIGHTProd/kjung-STARLIGHT_RAW_kjung_100kTest-237f2877ab396a5cd88221670e02a64e/USER'
-config.Data.inputDBS = 'global'
+config.Data.inputDataset = '/MinBias_TuneCUETP8M1_5p02TeV-pythia8/twang-MinBias_TuneCUETP8M1_5p02TeV_pythia8_pp502Fall15_MCRUN2_71_V1_v1_step2_CMSSW_7_4_15_20151105-792724e95bc6b3667ad91f57fcdd4eac/USER'
+config.Data.inputDBS = 'phys03'
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1

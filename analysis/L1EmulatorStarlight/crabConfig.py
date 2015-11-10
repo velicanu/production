@@ -13,7 +13,7 @@ config.JobType.maxMemoryMB = 3500 #default 2000
 config.JobType.outputFiles = ['openHLT.root']
 config.section_('Data')
 config.Data.inputDataset = '/STARLIGHTProd/kjung-STARLIGHT_RAW_kjung_100kTest-237f2877ab396a5cd88221670e02a64e/USER'
-config.Data.inputDBS = 'global'
+config.Data.inputDBS = 'phys03'
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1

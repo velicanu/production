@@ -12,7 +12,7 @@ config.JobType.pluginName = 'Analysis'
 config.JobType.maxMemoryMB = 3500 #default 2000
 config.JobType.outputFiles = ['openHLT.root']
 config.section_('Data')
-config.Data.inputDataset = '/Hydjet_Quenched_MinBias_5020GeV/StoreResults-HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI_RAW_6da45e4e90741bc03dbd9aec5f36c050-v1/USER'
+config.Data.inputDataset = '/STARLIGHTProd/kjung-STARLIGHT_RAW_kjung_100kTest-237f2877ab396a5cd88221670e02a64e/USER'
 config.Data.inputDBS = 'global'
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1

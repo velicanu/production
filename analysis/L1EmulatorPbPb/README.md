@@ -59,6 +59,28 @@ process.caloStage1Params.centralityLUTFile = cms.FileInPath("L1Trigger/L1TCalori
 
 process.caloStage1Params.regionPUSType = cms.string("zeroWall")
 
+process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_condDBv2_cff')
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+# Format: map{(record,label):(tag,connection),...}
+recordOverrides = { ('L1RCTParametersRcd', None) :
+('L1RCTParametersRcd_L1TDevelCollisions_ExtendedScaleFactorsV4_HIDisabledFGHOE', None)
+}
+process.GlobalTag = GlobalTag(process.GlobalTag,'75X_mcRun2_HeavyIon_v6', recordOverrides)
+# If the payloads are newer than the GlobalTag snapshot time, this will allow the payload to be loaded
+process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+
+##### you only need these lines if you are running on a hydjet sample
+from CondCore.DBCommon.CondDBSetup_cfi import *
+process.beamspot = cms.ESSource("PoolDBESSource",CondDBSetup,
+  toGet = cms.VPSet(cms.PSet( 
+    record = cms.string('BeamSpotObjectsRcd'),
+    tag= cms.string('RealisticHICollisions2011_STARTHI50_mc') 
+    )),
+  connect=cms.string('frontier://FrontierProd/CMS_COND_31X_BEAMSPOT')
+  )
+process.es_prefer_beamspot = cms.ESPrefer("PoolDBESSource","beamspot")
+
+
 # replace 'TEST' with the process name of your hlt config
 process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
 process.hltbitanalysis.HLTProcessName = cms.string('TEST')
@@ -72,16 +94,18 @@ process.TFileService = cms.Service("TFileService",
                                    fileName=cms.string("openHLT.root"))
                                    
                                    
-process.L1UpgradeAnalyzer = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
-                                           InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
-                                           InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
-                                           InputLayer2HFBitCountCollection = cms.InputTag("caloStage1Digis:HFBitCounts"),
-                                           InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
-                                           InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
-                                           InputLayer1Collection = cms.InputTag("simRctUpgradeFormatDigis"),
-                                           legacyRCTDigis = cms.InputTag("simRctDigis")
+
+process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
+                                         InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
+                                         InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
+                                         InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
+                                         InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
+                                         InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
+                                         InputLayer1Collection = cms.InputTag("None"),
+                                         legacyRCTDigis = cms.InputTag("None")
 )
-process.L1UpgradeAnalyzerPath = cms.EndPath(process.L1UpgradeAnalyzer)
+
+process.L1UpgradeAnalyzerPath = cms.EndPath(process.EmulatorResults)
 ```
 
 Step 4 - Run:

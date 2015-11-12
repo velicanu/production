@@ -1,4 +1,4 @@
-# How to run the L1 Emulator
+# How to run the L1 Emulator on MC
 
 Step 1 - Setup CMSSW and compile:
 

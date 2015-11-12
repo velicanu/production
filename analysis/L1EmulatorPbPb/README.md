@@ -27,6 +27,10 @@ process.SiStripGainESProducer = cms.ESProducer( "SiStripGainESProducer",
 
 process.SiStripQualityESProducer = cms.ESProducer( "SiStripQualityESProducer",
 ```
+add the following line to process.options = cms.untracked.PSet(
+```python
+SkipEvent = cms.untracked.vstring('ProductNotFound')
+```
 add these lines to the end of the config:
 ```python
 

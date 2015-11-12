@@ -32,6 +32,8 @@ add these lines to the end of the config:
 
 ### CUSTOMIZATION
 
+process.options.SkipEvent = cms.untracked.vstring('ProductNotFound')
+
 process.load('L1Trigger.L1TCalorimeter.caloConfigStage1HI_cfi')
 process.load('L1Trigger.L1TCalorimeter.caloStage1Params_HI_cfi')
 process.caloStage1Params.regionPUSType = cms.string("zeroWall")

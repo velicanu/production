@@ -3,11 +3,9 @@
 Step 1 - Setup CMSSW and compile:
 
 ```bash
-cmsrel CMSSW_7_5_4
-cd CMSSW_7_5_4/src
+cmsrel CMSSW_7_5_5
+cd CMSSW_7_5_5/src
 cmsenv
-git cms-merge-topic -u 12183
-git cms-merge-topic 12130 #this is Michael's PR number
 git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAnalyzer
 scram build -j4             # set 4 to the number of cores your machine has, if you don't know leave it at 4
 ```

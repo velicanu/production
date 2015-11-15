@@ -9,20 +9,20 @@ process.options = cms.untracked.PSet(
 # HiForest labelling info
 #####################################################################################
 
-process.load("HeavyIonsAnalysis.JetAnalysis.HiForest_cff")
-process.HiForest.inputLines = cms.vstring("HiForest V3",)
-import subprocess
-version = subprocess.Popen(["(cd $CMSSW_BASE/src && git describe --tags)"], stdout=subprocess.PIPE, shell=True).stdout.read()
-if version == '':
-    version = 'no git info'
-process.HiForest.HiForestVersion = cms.untracked.string(version)
+# process.load("HeavyIonsAnalysis.JetAnalysis.HiForest_cff")
+# process.HiForest.inputLines = cms.vstring("HiForest V3",)
+# import subprocess
+# version = subprocess.Popen(["(cd $CMSSW_BASE/src && git describe --tags)"], stdout=subprocess.PIPE, shell=True).stdout.read()
+# if version == '':
+    # version = 'no git info'
+# process.HiForest.HiForestVersion = cms.untracked.string(version)
 
 #####################################################################################
 # Input source
 #####################################################################################
                             
 process.source = cms.Source("NewEventStreamFileReader",
-    fileNames = cms.untracked.vstring('root://eoscms.cern.ch///store/t0streamer/Data/Express/000/261/396/run261396_ls0001_streamExpress_StorageManager.dat'
+    fileNames = cms.untracked.vstring('root://eoscms.cern.ch///store/t0streamer/Data/Express/000/261/395/run261395_ls0010_streamExpress_StorageManager.dat'
   )
 )
 
@@ -74,7 +74,7 @@ process.makeEdm = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('USER')),
           outputCommands = cms.untracked.vstring('keep *'),
           # SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('filterCsDiJetAve_1e29')), 
-          fileName = cms.untracked.string('run261396_ls0001_streamExpress_StorageManager.root'))
+          fileName = cms.untracked.string('run261395_ls0010_streamExpress_StorageManager.root'))
 
 
 

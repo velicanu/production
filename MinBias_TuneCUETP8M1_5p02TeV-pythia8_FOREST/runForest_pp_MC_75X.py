@@ -29,7 +29,7 @@ process.HiForest.HiForestVersion = cms.untracked.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-    "file:step3_1.root"
+    "/store/user/velicanu/MinBias_TuneCUETP8M1_5p02TeV-pythia8/MinBias_TuneCUETP8M1_5p02TeV-pythia8_RECO/151114_222025/0000/step3_1.root"
     ))
 
 # Number of events we want to process, -1 = all events

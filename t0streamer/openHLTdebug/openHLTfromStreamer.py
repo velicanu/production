@@ -48,6 +48,16 @@ process.load('Configuration.StandardSequences.RawToDigi_cff')
 process.load('Configuration.StandardSequences.ReconstructionHeavyIons_cff')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 
+
+process.load('Configuration.EventContent.EventContent_cff')
+process.load('Configuration.StandardSequences.MagneticField_cff')
+process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
+process.load('Configuration.StandardSequences.L1Reco_cff')
+process.load('Configuration.StandardSequences.EndOfProcess_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
+
+
 # PbPb 53X MC
 
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
@@ -83,7 +93,8 @@ process.hltobject.processName = cms.string('TEST')
 process.hltobject.treeName = cms.string("JetTriggers")  #change this if you want a different tree name
 process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("hltL1GtObjectMap","","TEST")
 process.hltobject.triggerEvent = cms.InputTag("TriggerResults","",'TEST')
+process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("gtDigis","","TEST")
 
-process.hltBitAnalysis = cms.EndPath(process.hltbitanalysis*process.hltobject)
+process.hltBitAnalysis = cms.EndPath(process.RawToDigi*process.L1Reco*process.hltbitanalysis*process.hltobject)
 
 

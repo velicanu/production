@@ -1,0 +1,11 @@
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0001_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0002_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0003_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0004_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0005_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0006_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0007_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0008_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0009_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0010_streamExpress_StorageManager.dat
+/store/t0streamer/Data/Express/000/261/396/run261396_ls0011_streamExpress_StorageManager.dat

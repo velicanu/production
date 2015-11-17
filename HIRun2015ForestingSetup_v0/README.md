@@ -14,17 +14,31 @@ git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAn
 # Dfinder
 git clone -b Dfinder https://github.com/taweiXcms/Bfinder.git
 scram build -j8
-
-cp HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_PbPb_DATA_75X.py .
-cp ./HeavyIonsAnalysis/JetAnalysis/test/dbFiles/HI_PythiaCUETP8M1_5020GeV_753p1_v3.db .
+cd HeavyIonsAnalysis/JetAnalysis/test/
 ```
 
 Customize forest config.
 
-Run on this file:
+Run on this file (pp):
 ```bash
-/store/group/phys_heavyions/velicanu/store/t0streamer/Data/Express/000/261/396/RECO/step3_0.root
+/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/261/544/00000//22D08F8A-2E8D-E511-BF87-02163E011965.root
 ```
+
+Apply this customization for L1 : https://twiki.cern.ch/twiki/bin/view/CMS/HiForestSetupWithUnpacker#Customization
+
+Apply this customization for dfinder:
+```python
+AddCaloMuon = False
+runOnMC = False
+HIFormat = False
+UseGenPlusSim = False
+VtxLabel = "offlinePrimaryVerticesWithBS"
+TrkLabel = "generalTracks"
+from Bfinder.finderMaker.finderMaker_75X_cff import finderMaker_75X
+finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim, VtxLabel, TrkLabel)
+```
+and add process.finder to ana_step path
+
 
 
 

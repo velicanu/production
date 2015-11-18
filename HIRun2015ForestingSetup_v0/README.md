@@ -14,7 +14,8 @@ git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAn
 # Dfinder
 git clone -b Dfinder https://github.com/taweiXcms/Bfinder.git
 scram build -j8
-cd HeavyIonsAnalysis/JetAnalysis/test/
+cp HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_DATA_75X_Express.py .
+cp HeavyIonsAnalysis/JetAnalysis/test/*.db .
 ```
 
 Customize forest config.
@@ -38,6 +39,11 @@ from Bfinder.finderMaker.finderMaker_75X_cff import finderMaker_75X
 finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim, VtxLabel, TrkLabel)
 ```
 and add process.finder to ana_step path
+
+Now run:
+```bash
+cmsRun runForestAOD_pp_DATA_75X_Express.py outputFile=HiForest_caftest.root maxEvents=-1 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/261/544/00000/22D08F8A-2E8D-E511-BF87-02163E011965.root
+```
 
 
 

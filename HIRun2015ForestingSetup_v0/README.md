@@ -13,10 +13,14 @@ git cms-merge-topic -u CmsHI:forest_$CMSSW_VERSION
 git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAnalyzer
 # Dfinder
 git clone -b Dfinder https://github.com/taweiXcms/Bfinder.git
+git clone git@github.com:velicanu/production.git
+cp production/HIRun2015ForestingSetup_v0/templateSequence_bTag_cff.py.txt HeavyIonsAnalysis/JetAnalysis/python/jets/
+cd HeavyIonsAnalysis/JetAnalysis/python/jets
+./makeJetSequences.sh
+cd -
 scram build -j8
 
 # grab submit scripts
-git@github.com:velicanu/production.git
 cp production/HIRun2015ForestingSetup_v0/* .
 cp HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_DATA_75X_Express.py .
 cp HeavyIonsAnalysis/JetAnalysis/test/dbFiles/*.db .

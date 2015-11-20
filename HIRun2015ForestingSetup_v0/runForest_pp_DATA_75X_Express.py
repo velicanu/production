@@ -62,6 +62,20 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
+# set snapshot to future to allow centrality table payload.
+process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+
+process.GlobalTag.toGet.extend([
+ cms.PSet(record = cms.string("HeavyIonRcd"),
+ connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+ ## 5.02 TeV Centrality Tables
+ #tag = cms.string("CentralityTable_HFtowers200_HydjetDrum5_v740x01_mc"),
+ #label = cms.untracked.string("HFtowersHydjetDrum5")
+ ## 2.76 TeV Centrality Tables for data
+ tag = cms.string("CentralityTable_HFtowers200_Glauber2010A_eff99_run1v750x01_offline"),
+ label = cms.untracked.string("HFtowers")
+ ),
+])
 
 from HeavyIonsAnalysis.Configuration.CommonFunctionsLocalDB_cff import overrideJEC_HI_PythiaCUETP8M1_5020GeV_753p1_v6_db
 process = overrideJEC_HI_PythiaCUETP8M1_5020GeV_753p1_v6_db(process)
@@ -251,7 +265,23 @@ process.ana_step = cms.Path(
                             process.ppTrack
                             )
 
+
+#####################################################################################
+# PAcollisionEventSelection stuff
+#####################################################################################
+process.load('HeavyIonsAnalysis.Configuration.hfCoincFilter_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.EventSelection_cff')
+process.PAprimaryVertexFilter = cms.EDFilter("VertexSelector",
+    src = cms.InputTag("offlinePrimaryVertices"),
+    cut = cms.string("!isFake && abs(z) <= 25 && position.Rho <= 2 && tracksSize >= 2"),
+    filter = cms.bool(True), # otherwise it won't filter the events
+)
+process.PAcollisionEventSelection = cms.Sequence(process.hfCoincFilter *
+                                         process.PAprimaryVertexFilter 
+                                         )
+
+                                         
+                                         
 process.phltJetHI = cms.Path( process.hltJetHI )
 # process.primaryVertexFilter.src = cms.InputTag("offlinePrimaryVertices")
 process.PAcollisionEventSelection = cms.Path(process.PAcollisionEventSelection)

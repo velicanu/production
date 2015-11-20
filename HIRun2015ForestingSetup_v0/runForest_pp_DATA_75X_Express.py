@@ -279,8 +279,18 @@ process.PAprimaryVertexFilter = cms.EDFilter("VertexSelector",
     cut = cms.string("!isFake && abs(z) <= 25 && position.Rho <= 2 && tracksSize >= 2"),
     filter = cms.bool(True), # otherwise it won't filter the events
 )
+
+process.NoScraping = cms.EDFilter("FilterOutScraping",
+ applyfilter = cms.untracked.bool(True),
+ debugOn = cms.untracked.bool(False),
+ numtrack = cms.untracked.uint32(10),
+ thresh = cms.untracked.double(0.25)
+)
+
+
 process.PAcollisionEventSelection = cms.Sequence(process.hfCoincFilter *
-                                         process.PAprimaryVertexFilter 
+                                         process.PAprimaryVertexFilter *
+                                         process.NoScraping 
                                          )
 
                                          
@@ -290,6 +300,24 @@ process.phltJetHI = cms.Path( process.hltJetHI )
 process.PAcollisionEventSelection = cms.Path(process.PAcollisionEventSelection)
 process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
+
+
+process.phfCoincFilter = cms.Path(process.hfCoincFilter )
+process.phfCoincFilter3 = cms.Path(process.hfCoincFilter3 )
+process.pPAprimaryVertexFilter = cms.Path(process.PAprimaryVertexFilter)
+process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
+process.phfPosFilter3 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter3)
+process.phfNegFilter3 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter3)
+process.hfPosFilter2 = process.hfPosFilter.clone(minNumber=cms.uint32(2))
+process.hfNegFilter2 = process.hfNegFilter.clone(minNumber=cms.uint32(2))
+process.phfPosFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter2)
+process.phfNegFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter2)
+process.phfPosFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter)
+process.phfNegFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter)
+process.pBeamScrapingFilter=cms.Path(process.NoScraping)
+
+
+
 
 process.load("HeavyIonsAnalysis.VertexAnalysis.PAPileUpVertexFilter_cff")
 

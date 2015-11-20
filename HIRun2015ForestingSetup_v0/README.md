@@ -14,35 +14,26 @@ git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAn
 # Dfinder
 git clone -b Dfinder https://github.com/taweiXcms/Bfinder.git
 scram build -j8
+
+# grab submit scripts
+git@github.com:velicanu/production.git
+cp production/HIRun2015ForestingSetup_v0/* .
 cp HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_DATA_75X_Express.py .
-cp HeavyIonsAnalysis/JetAnalysis/test/*.db .
+cp HeavyIonsAnalysis/JetAnalysis/test/dbFiles/*.db .
 ```
 
-Customize forest config.
-
-Run on this file (pp):
+Run interactively:
 ```bash
-/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/261/544/00000//22D08F8A-2E8D-E511-BF87-02163E011965.root
+cmsRun runOpenHLT_pp_DATA_75X_Express.py outputFile=openHLT.root maxEvents=10 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/262/163/00000/C4717393-ED8E-E511-9F65-02163E0120F9.root
+
+cmsRun runForest_pp_DATA_75X_Express.py outputFile=test.root maxEvents=10 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/262/163/00000/C4717393-ED8E-E511-9F65-02163E0120F9.root
 ```
 
-Apply this customization for L1 : https://twiki.cern.ch/twiki/bin/view/CMS/HiForestSetupWithUnpacker#Customization
-
-Apply this customization for dfinder:
-```python
-AddCaloMuon = False
-runOnMC = False
-HIFormat = False
-UseGenPlusSim = False
-VtxLabel = "offlinePrimaryVerticesWithBS"
-TrkLabel = "generalTracks"
-from Bfinder.finderMaker.finderMaker_75X_cff import finderMaker_75X
-finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim, VtxLabel, TrkLabel)
-```
-and add process.finder to ana_step path
-
-Now run:
+Submit to caf queue
 ```bash
-cmsRun runForestAOD_pp_DATA_75X_Express.py outputFile=HiForest_caftest.root maxEvents=-1 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/261/544/00000/22D08F8A-2E8D-E511-BF87-02163E011965.root
+python submitOpenHLTExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/openhlt/Run2015E/ExpressPhysics/FEVT/ -i ExpressPhysics.262163.v2.list
+
+python submitForestExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/forest/Run2015E/ExpressPhysics/FEVT/v2/ -i ExpressPhysics.262163.v2.list --proxy=proxyforprod
 ```
 
 

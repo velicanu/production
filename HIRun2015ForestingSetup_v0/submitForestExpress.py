@@ -55,7 +55,7 @@ for line in f:
             scriptFile.write('cd -\n')
             scriptFile.write('cp %s/runForest_pp_DATA_75X_Express.py %s \n' % (workBase,jobsBase))
             scriptFile.write('cp %s/runForest_pp_DATA_75X_Express.py .\n' % workBase)
-            scriptFile.write('cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/*.db .\n')
+            scriptFile.write('cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/dbFiles/*.db .\n')
             scriptFile.write('cmsRun runForest_pp_DATA_75X_Express.py outputFile=HiForest_%d.root maxEvents=-1 inputFiles=%s\n' % (jobCounter,line) )
             scriptFile.write('cmsMkdir %s\n' % outdir)
             scriptFile.write('ls\n')

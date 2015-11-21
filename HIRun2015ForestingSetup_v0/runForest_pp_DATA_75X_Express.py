@@ -62,27 +62,10 @@ process.load('Configuration.StandardSequences.ReconstructionHeavyIons_cff')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
-# set snapshot to future to allow centrality table payload.
-process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
-process.GlobalTag.toGet.extend([
- cms.PSet(record = cms.string("HeavyIonRcd"),
- connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
- ## 5.02 TeV Centrality Tables
- #tag = cms.string("CentralityTable_HFtowers200_HydjetDrum5_v740x01_mc"),
- #label = cms.untracked.string("HFtowersHydjetDrum5")
- ## 2.76 TeV Centrality Tables for data
- tag = cms.string("CentralityTable_HFtowers200_Glauber2010A_eff99_run1v750x01_offline"),
- label = cms.untracked.string("HFtowers")
- ),
-])
-
-# from HeavyIonsAnalysis.Configuration.CommonFunctionsLocalDB_cff import overrideJEC_HI_PythiaCUETP8M1_5020GeV_753p1_v6_db
-# process = overrideJEC_HI_PythiaCUETP8M1_5020GeV_753p1_v6_db(process)
-
-from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_pp5020
-process = overrideJEC_pp5020(process)
+from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_pp5020_Data
+process = overrideJEC_pp5020_Data(process)
 
 
 #for pp data create centrality object and bin
@@ -137,6 +120,10 @@ process.hiEvtAnalyzer.CentralitySrc = cms.InputTag("pACentrality")
 process.hiEvtAnalyzer.Vertex = cms.InputTag("offlinePrimaryVertices")
 process.hiEvtAnalyzer.doEvtPlane = cms.bool(False)
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
+############ hlt oject
+process.load("HeavyIonsAnalysis.EventAnalysis.hltobject_cfi")
+process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
+process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("gtDigis","","HLT")
 
 #####################################################################################
 # To be cleaned
@@ -258,6 +245,7 @@ process.pfcandAnalyzer.genLabel = cms.InputTag("genParticles")
 
 process.ana_step = cms.Path(
                             process.hltanalysis *
+                            process.hltobject +
                             process.siPixelRecHits * process.pACentrality * process.centralityBin * #for pp data only on reco
                             process.hiEvtAnalyzer*
                             process.jetSequences +
@@ -292,25 +280,29 @@ process.NoScraping = cms.EDFilter("FilterOutScraping",
  thresh = cms.untracked.double(0.25)
 )
 
+process.load('RecoHI.HiCentralityAlgos.HiClusterCompatibility_cfi')
+process.load('HeavyIonsAnalysis.EventAnalysis.HIClusterCompatibilityFilter_cfi')
+process.clusterCompatibilityFilter.clusterPars = cms.vdouble(0.0,0.006)
 
 process.PAcollisionEventSelection = cms.Sequence(process.hfCoincFilter *
                                          process.PAprimaryVertexFilter *
                                          process.NoScraping 
                                          )
 
-                                         
-                                         
 process.phltJetHI = cms.Path( process.hltJetHI )
 # process.primaryVertexFilter.src = cms.InputTag("offlinePrimaryVertices")
 process.PAcollisionEventSelection = cms.Path(process.PAcollisionEventSelection)
 process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
 
+process.pClusterCompaitiblityFilter = cms.Path(process.siPixelRecHits*process.hiClusterCompatibility * process.clusterCompatibilityFilter)
+process.pPAprimaryVertexFilter = cms.Path(process.PAprimaryVertexFilter)
+process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
+process.pBeamScrapingFilter=cms.Path(process.NoScraping)
 
 process.phfCoincFilter = cms.Path(process.hfCoincFilter )
 process.phfCoincFilter3 = cms.Path(process.hfCoincFilter3 )
-process.pPAprimaryVertexFilter = cms.Path(process.PAprimaryVertexFilter)
-process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
+
 process.phfPosFilter3 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter3)
 process.phfNegFilter3 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter3)
 process.hfPosFilter2 = process.hfPosFilter.clone(minNumber=cms.uint32(2))
@@ -319,7 +311,6 @@ process.phfPosFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTower
 process.phfNegFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter2)
 process.phfPosFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter)
 process.phfNegFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter)
-process.pBeamScrapingFilter=cms.Path(process.NoScraping)
 
 
 

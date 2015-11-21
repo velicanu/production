@@ -38,10 +38,10 @@ newf = open(newfile,'w')
 jobCounter=0
 m = re.compile(r"000/\d\d\d/\d\d\d") #used to find run number
 for line in f:
-    if not line.find('root://eoscms//eos/cms') :
+    if not line.find('root://') :
         if not line.startswith('#') :
             print line
-            newf.write(line.replace('root://eoscms//eos/cms', '# root://eoscms//eos/cms'))
+            newf.write(line.replace('root://', '# root://'))
 
             found = m.findall(line)
             outdir = '%s/%s' % (opt.output,found[0])

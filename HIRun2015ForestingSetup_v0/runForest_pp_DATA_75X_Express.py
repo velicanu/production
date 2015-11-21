@@ -162,8 +162,8 @@ process.hltMuTree.vertices = cms.InputTag("offlinePrimaryVertices")
 process.ppTrack.trackSrc = cms.InputTag("generalTracks")
 # process.ppTrack.doMVA = cms.untracked.bool(False)
 process.ppTrack.mvaSrc = cms.string("generalTracks")
-# process.ppTrack.doPFMatching = False
-
+# process.ppTrack.doPFMatching = cms.untracked.bool(True)
+process.ppTrack.pfCandSrc = cms.InputTag('particleFlow')
 
 #####################
 # L1 Digis

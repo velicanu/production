@@ -22,8 +22,6 @@ scram build -j8
 
 # grab submit scripts
 cp production/HIRun2015ForestingSetup_v0/* .
-cp HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_DATA_75X_Express.py .
-cp HeavyIonsAnalysis/JetAnalysis/test/dbFiles/*.db .
 ```
 
 Run interactively:

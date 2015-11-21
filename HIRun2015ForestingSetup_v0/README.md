@@ -40,6 +40,6 @@ python submitForestExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velica
 
 Submit all runs in 'runstoprocess' to caf queue
 ```bash
-./suballruns.sh
+./suballruns.sh v6
 ```
 

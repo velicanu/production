@@ -167,7 +167,7 @@ process.simRctUpgradeFormatDigis.regionTag = cms.InputTag("caloStage1Digis")
 process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
 process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker")
 
-process.p1 = cms.Path(
+process.p1 = cms.Sequence(
     process.caloStage1Digis +
     process.simRctUpgradeFormatDigis +
     process.simCaloStage1Digis +
@@ -178,15 +178,15 @@ process.TFileService = cms.Service("TFileService",
                                    fileName = cms.string("L1UnpackedReEmulator.root")
 )
 
-process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
-                                         InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
-                                         InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
-                                         InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
-                                         InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
-                                         InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
-                                         InputLayer1Collection = cms.InputTag("None"),
-                                         legacyRCTDigis = cms.InputTag("None")
-)
+# process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
+                                         # InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
+                                         # InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
+                                         # InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
+                                         # InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
+                                         # InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
+                                         # InputLayer1Collection = cms.InputTag("None"),
+                                         # legacyRCTDigis = cms.InputTag("None")
+# )
 
 process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2Collection = cms.InputTag("caloStage1Digis"),
@@ -199,13 +199,13 @@ process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
 )
 
 
-process.p2 = cms.Path(process.EmulatorResults + process.UnpackerResults)
+process.p2 = cms.Sequence(process.UnpackerResults)
 
 # process.L1EmulatorUnpacker = cms.Sequence(process.EmulatorResults + process.UnpackerResults)
 
-process.schedule = cms.Schedule(
-    process.p1, process.p2
-    )
+# process.schedule = cms.Schedule(
+    # process.p1, process.p2
+    # )
 
 AddCaloMuon = False
 runOnMC = False
@@ -242,9 +242,9 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
-                            process.schedule +
-                            # process.L1Sequence +
-                            # process.L1EmulatorUnpacker +
+                            # process.schedule +
+                            process.p1 +
+                            process.p2 +
                             process.finderSequence +
                             process.rechitanalyzer +
                             process.hltMuTree + 

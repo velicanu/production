@@ -72,6 +72,14 @@ process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
 process.centralityBin.Centrality = cms.InputTag("hiCentrality")
 process.centralityBin.centralityVariable = cms.string("HFtowers")
 
+process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+process.GlobalTag.toGet.extend([
+  cms.PSet(record = cms.string("HeavyIonRcd"),
+     tag = cms.string("CentralityTable_HFtowers200_Glauber2015A_v750x01_offline"),
+     connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+     label = cms.untracked.string("HFtowers")
+  ),
+])
 
 #####################################################################################
 # Define tree output
@@ -148,36 +156,27 @@ process.anaTrack.trackSrc = cms.InputTag("hiGeneralTracks")
 # L1 Digis
 #####################
 
-process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
-
 process.load('L1Trigger.L1TCalorimeter.caloConfigStage1HI_cfi')
-process.load('L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff')
+process.load('L1Trigger.L1TCalorimeter.L1TCaloStage1_cff')
+process.load('L1Trigger.L1TCalorimeter.caloStage1Params_HI_cfi')
+process.caloStage1Params.minimumBiasThresholds = cms.vint32(1,1,2,2)
 
-### nominal
-process.load('L1Trigger.L1TCalorimeter.caloStage1Params_cfi')
-process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker") # need this for PbPb
-### PUS mask
-process.caloStage1Params.jetRegionMask = cms.int32(0b0000100000000000010000)
-#process.caloStage1Params.jetRegionMask = cms.int32(0)
-### EG 'iso' (eta) mask
-process.caloStage1Params.egEtaCut = cms.int32(0b0000001111111111000000)
-### Single track eta mask
-process.caloStage1Params.tauRegionMask = cms.int32(0b1111111100000011111111)
-### Centrality eta mask
-process.caloStage1Params.centralityRegionMask = cms.int32(0b0000111111111111110000)
-### jet seed threshold for 3x3 step of jet finding
-process.caloStage1Params.jetSeedThreshold = cms.double(0)
-### HTT settings (this won't match anyway yet)
-process.caloStage1Params.etSumEtThreshold        = cms.vdouble(0., 7.) #ET, HT
-### Minimum Bias thresholds
-process.caloStage1Params.minimumBiasThresholds = cms.vint32(4,4,6,6)
-### Centrality LUT
-# process.caloStage1Params.centralityLUTFile = cms.FileInPath("L1Trigger/L1TCalorimeter/data/centrality_extended_LUT_preRun.txt")
+process.simRctUpgradeFormatDigis.emTag = cms.InputTag("caloStage1Digis")
+process.simRctUpgradeFormatDigis.regionTag = cms.InputTag("caloStage1Digis")
 
-process.L1Sequence = cms.Sequence(
-    process.L1TCaloStage1_PPFromRaw +
-    process.caloStage1Digis
+process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
+process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker")
+
+process.p1 = cms.Path(
+    process.caloStage1Digis +
+    process.simRctUpgradeFormatDigis +
+    process.simCaloStage1Digis +
+    process.simCaloStage1FinalDigis
     )
+
+process.TFileService = cms.Service("TFileService",
+                                   fileName = cms.string("L1UnpackedReEmulator.root")
+)
 
 process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
@@ -185,8 +184,8 @@ process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
                                          InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
                                          InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
-                                         InputLayer1Collection = cms.InputTag("simRctUpgradeFormatDigis"),
-                                         legacyRCTDigis = cms.InputTag("simRctDigis")
+                                         InputLayer1Collection = cms.InputTag("None"),
+                                         legacyRCTDigis = cms.InputTag("None")
 )
 
 process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
@@ -195,12 +194,18 @@ process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2IsoTauCollection = cms.InputTag("caloStage1Digis:isoTaus"),
                                          InputLayer2CaloSpareCollection = cms.InputTag("caloStage1Digis:HFRingSums"),
                                          InputLayer2HFBitCountCollection = cms.InputTag("caloStage1Digis:HFBitCounts"),
-                                         InputLayer1Collection = cms.InputTag("None"),
+                                         InputLayer1Collection = cms.InputTag("simRctUpgradeFormatDigis"),
                                          legacyRCTDigis = cms.InputTag("caloStage1Digis")
 )
 
 
-process.L1EmulatorUnpacker = cms.Sequence(process.EmulatorResults + process.UnpackerResults)
+process.p2 = cms.Path(process.EmulatorResults + process.UnpackerResults)
+
+# process.L1EmulatorUnpacker = cms.Sequence(process.EmulatorResults + process.UnpackerResults)
+
+process.schedule = cms.Schedule(
+    process.p1, process.p2
+    )
 
 AddCaloMuon = False
 runOnMC = False
@@ -231,15 +236,16 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
 process.ana_step = cms.Path(
                             process.hltanalysis *
                             # process.hltobject +
-                            # process.centralityBin * 
+                            process.centralityBin * 
                             process.hiEvtAnalyzer*
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
+                            process.schedule +
                             # process.L1Sequence +
                             # process.L1EmulatorUnpacker +
-                            # process.finderSequence +
+                            process.finderSequence +
                             process.rechitanalyzer +
                             process.hltMuTree + 
                             process.HiForest +

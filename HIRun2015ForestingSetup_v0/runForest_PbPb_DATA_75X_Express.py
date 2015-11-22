@@ -176,10 +176,6 @@ process.L1Sequence = cms.Path(
     process.simCaloStage1FinalDigis
     )
 
-process.TFileService = cms.Service("TFileService",
-                                   fileName = cms.string("L1UnpackedReEmulator.root")
-)
-
 process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
                                          InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
@@ -216,10 +212,10 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
 
 
 process.ana_step = cms.Path(
-                            process.hltanalysis *
+                            process.hltanalysis +
                             # process.hltobject +
                             # process.centralityBin * 
-                            process.hiEvtAnalyzer*
+                            process.hiEvtAnalyzer +
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +

@@ -155,6 +155,7 @@ process.load('L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff')
 
 ### nominal
 process.load('L1Trigger.L1TCalorimeter.caloStage1Params_cfi')
+process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker") # need this for PbPb
 ### PUS mask
 process.caloStage1Params.jetRegionMask = cms.int32(0b0000100000000000010000)
 #process.caloStage1Params.jetRegionMask = cms.int32(0)
@@ -220,18 +221,11 @@ process.rechitanalyzer.useJets = cms.untracked.bool(False)
 
 # photons
 process.load('HeavyIonsAnalysis.PhotonAnalysis.ggHiNtuplizer_cfi')
-process.ggHiNtuplizer.gsfElectronLabel   = cms.InputTag("gedGsfElectrons")
-process.ggHiNtuplizer.useValMapIso       = cms.bool(False)
-process.ggHiNtuplizer.VtxLabel           = cms.InputTag("hiSelectedVertex")
-process.ggHiNtuplizer.particleFlowCollection = cms.InputTag("particleFlow")
-process.ggHiNtuplizer.doVsIso            = cms.bool(False)
 process.ggHiNtuplizer.doGenParticles = False
-process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.InputTag('gedPhotons'))
+process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.InputTag('gedPhotonsTmp'),
+                                                       recoPhotonHiIsolationMap = cms.InputTag('photonIsolationHIProducerGED')
+                                                       )
 
-###############################################################
-process.pfcandAnalyzer.pfCandidateLabel = cms.InputTag("particleFlow")
-process.pfcandAnalyzer.doVS = cms.untracked.bool(False)
-process.pfcandAnalyzer.doUEraw_ = cms.untracked.bool(False)
 
 
 process.ana_step = cms.Path(
@@ -240,12 +234,12 @@ process.ana_step = cms.Path(
                             # process.centralityBin * 
                             process.hiEvtAnalyzer*
                             process.jetSequences +
-                            # process.ggHiNtuplizer +
-                            # process.ggHiNtuplizerGED +
-                            # process.pfcandAnalyzer +
-                            # process.L1Sequence +
-                            # process.L1EmulatorUnpacker +
-                            # process.finderSequence +
+                            process.ggHiNtuplizer +
+                            process.ggHiNtuplizerGED +
+                            process.pfcandAnalyzer +
+                            process.L1Sequence +
+                            process.L1EmulatorUnpacker +
+                            process.finderSequence +
                             process.rechitanalyzer +
                             process.hltMuTree + 
                             process.HiForest +

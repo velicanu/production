@@ -174,9 +174,6 @@ process.p1 = cms.Sequence(
     process.simCaloStage1FinalDigis
     )
 
-process.TFileService = cms.Service("TFileService",
-                                   fileName = cms.string("L1UnpackedReEmulator.root")
-)
 
 # process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          # InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),

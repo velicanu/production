@@ -126,9 +126,9 @@ process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
 process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("gtDigis","","HLT")
 
 
-#####################                                                                      \
-#TUPEL                                                                                       
-#####################                                                                      \
+#####################                                                                      \               
+#TUPEL                                                                                                     
+#####################                                                                      \              
 
 
 process.load('HeavyIonsAnalysis.VectorBosonAnalysis.tupel_cfi')
@@ -136,9 +136,6 @@ process.tupel.vtxSrc     = cms.untracked.InputTag("offlinePrimaryVertices")
 process.tupel.jetSrc      = cms.untracked.InputTag("ak4PFpatJetsWithBtagging")
 
 #####################
-
-#####################################################################################
-# To be cleaned
 
 process.load('HeavyIonsAnalysis.JetAnalysis.ExtraTrackReco_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_cff')
@@ -263,7 +260,7 @@ process.ana_step = cms.Path(
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
-                            # process.tupel +
+                            process.tupel +
                             process.pfcandAnalyzer +
                             process.L1Sequence +
                             process.L1EmulatorUnpacker +

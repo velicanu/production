@@ -59,7 +59,7 @@ for line in f:
             scriptFile.write('cmsRun runForest_pp_DATA_75X_Express.py outputFile=HiForest_%d.root maxEvents=-1 inputFiles=%s\n' % (jobCounter,line) )
             scriptFile.write('cmsMkdir %s\n' % outdir)
             scriptFile.write('ls\n')
-            scriptFile.write('cmsStage HiForest_%d.root %s/HiForest_%d.root\n' % (jobCounter,outdir,jobCounter) )
+            scriptFile.write('cmsStage -f HiForest_%d.root %s/HiForest_%d.root\n' % (jobCounter,outdir,jobCounter) )
             scriptFile.write('rm HiForest_%d*root\n' % (jobCounter))
             scriptFile.close()
 

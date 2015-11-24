@@ -64,8 +64,8 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
-from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_pp5020_Data
-process = overrideJEC_pp5020_Data(process)
+from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_pp5020
+process = overrideJEC_pp5020(process)
 
 
 #for pp data create centrality object and bin

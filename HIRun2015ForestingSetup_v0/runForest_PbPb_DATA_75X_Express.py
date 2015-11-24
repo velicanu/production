@@ -123,8 +123,8 @@ process.TFileService = cms.Service("TFileService",
 
 
 
-process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu4CaloJetSequence_PbPb_data_cff')
-process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs4CaloJetSequence_PbPb_data_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu4CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs4CaloJetSequence_PbPb_data_bTag_cff')
 
 
 process.jetSequences = cms.Sequence(
@@ -203,15 +203,17 @@ process.p1 = cms.Sequence(
     )
 
 
-# process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
-                                         # InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
-                                         # InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
-                                         # InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
-                                         # InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
-                                         # InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
-                                         # InputLayer1Collection = cms.InputTag("None"),
-                                         # legacyRCTDigis = cms.InputTag("None")
-# )
+process.caloStage1Params.centralityLUTFile = cms.FileInPath("L1Trigger/L1TCalorimeter/data/centrality_extended_LUT_preRun.txt")
+
+process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
+                                         InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
+                                         InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
+                                         InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
+                                         InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
+                                         InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
+                                         InputLayer1Collection = cms.InputTag("None"),
+                                         legacyRCTDigis = cms.InputTag("None")
+)
 
 process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2Collection = cms.InputTag("caloStage1Digis"),
@@ -224,7 +226,7 @@ process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
 )
 
 
-process.p2 = cms.Sequence(process.UnpackerResults)
+process.p2 = cms.Sequence(process.UnpackerResults + process.EmulatorResults)
 
 # process.L1EmulatorUnpacker = cms.Sequence(process.EmulatorResults + process.UnpackerResults)
 
@@ -342,3 +344,16 @@ process.phfNegFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTower
 process.pAna = cms.EndPath(process.skimanalysis)
 
 # Customization
+
+import HLTrigger.HLTfilters.hltHighLevel_cfi
+
+process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
+
+
+# filter all path with the production filter sequence
+for path in process.paths:
+    getattr(process,path)._seq = process.hltMinBias * getattr(process,path)._seq
+
+    
+    

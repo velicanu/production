@@ -64,8 +64,36 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
-from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_pp5020_Data
-process = overrideJEC_pp5020_Data(process)
+
+
+##########################################JEC##########################################
+from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb5020
+process = overrideJEC_PbPb5020(process)
+##########################################JEC##########################################
+
+
+##########################################UE##########################################
+from CondCore.DBCommon.CondDBSetup_cfi import *
+process.uetable = cms.ESSource("PoolDBESSource",
+      DBParameters = cms.PSet(
+        messageLevel = cms.untracked.int32(0)
+        ),
+      timetype = cms.string('runnumber'),
+      toGet = cms.VPSet(
+          cms.PSet(record = cms.string("JetCorrectionsRecord"),
+                   tag = cms.string("UETableCompatibilityFormat_Calo_v00_express"),
+                   label = cms.untracked.string("UETable_PF")
+          ),
+          cms.PSet(record = cms.string("JetCorrectionsRecord"),
+                   tag = cms.string("UETableCompatibilityFormat_PF_v00_express"),
+                   label = cms.untracked.string("UETable_Calo")
+          )
+      ), 
+      connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+)
+process.es_prefer_uetable = cms.ESPrefer('PoolDBESSource','uetable')
+##########################################UE##########################################
+
 
 
 process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
@@ -215,8 +243,17 @@ finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim, VtxLabel
 
 
 process.load('HeavyIonsAnalysis.JetAnalysis.rechitanalyzer_cfi')
-process.rechitanalyzer.doVS = cms.untracked.bool(False)
+process.rechitanalyzer.doVS = cms.untracked.bool(True)
 process.rechitanalyzer.useJets = cms.untracked.bool(False)
+process.rechitanalyzer.EBTreePtMin = -9999
+process.rechitanalyzer.EETreePtMin = -9999
+process.rechitanalyzer.HBHETreePtMin = -9999
+process.rechitanalyzer.HFTreePtMin = -9999
+process.rechitanalyzer.HFlongMin = -9999
+process.rechitanalyzer.HFshortMin = -9999
+process.rechitanalyzer.HFtowerMin = -9999
+
+
 
 
 #####################
@@ -239,7 +276,6 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
-                            # process.schedule +
                             process.p1 +
                             process.p2 +
                             process.finderSequence +

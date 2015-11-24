@@ -4,8 +4,8 @@ First iteration setup.
 
 Setup environment:
 ```bash
-cmsrel CMSSW_7_5_5_patch2
-cd CMSSW_7_5_5_patch2/src
+cmsrel CMSSW_7_5_5_patch4
+cd CMSSW_7_5_5_patch4/src
 cmsenv
 # Main forest
 git cms-merge-topic -u CmsHI:forest_$CMSSW_VERSION
@@ -14,10 +14,6 @@ git clone git@github.com:richard-cms/L1UpgradeAnalyzer.git Analyzers/L1UpgradeAn
 # Dfinder
 git clone -b Dfinder https://github.com/taweiXcms/Bfinder.git
 git clone git@github.com:velicanu/production.git
-cp production/HIRun2015ForestingSetup_v0/templateSequence_bTag_cff.py.txt HeavyIonsAnalysis/JetAnalysis/python/jets/
-cd HeavyIonsAnalysis/JetAnalysis/python/jets
-./makeJetSequences.sh
-cd -
 scram build -j8
 
 # grab submit scripts

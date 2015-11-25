@@ -1,8 +1,8 @@
-# HIRun2015 Express Forest 
+## HIRun2015 Express Forest 
 
 First iteration setup. 
 
-Setup environment:
+## Setup environment:
 ```bash
 cmsrel CMSSW_7_5_5_patch4
 cd CMSSW_7_5_5_patch4/src
@@ -20,28 +20,28 @@ scram build -j8
 cp production/HIRun2015ForestingSetup_v0/* .
 ```
 
-Run interactively:
+## Run interactively:
 ```bash
 cmsRun runOpenHLT_pp_DATA_75X_Express.py outputFile=openHLT.root maxEvents=10 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/262/163/00000/C4717393-ED8E-E511-9F65-02163E0120F9.root
 
 cmsRun runForest_pp_DATA_75X_Express.py outputFile=test.root maxEvents=10 inputFiles=/store/express/Run2015E/ExpressPhysics/FEVT/Express-v1/000/262/163/00000/C4717393-ED8E-E511-9F65-02163E0120F9.root
 ```
 
-Submit one run to caf queue
+## Submit one run to caf queue
 ```bash
 python submitOpenHLTExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/openhlt/Run2015E/ExpressPhysics/FEVT/ -i ExpressPhysics.262163.v2.list
 
 python submitForestExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/forest/Run2015E/ExpressPhysics/FEVT/v2/ -i ExpressPhysics.262163.v2.list --proxy=proxyforprod
 ```
 
-Submit all runs in 'runstoprocess' to caf queue
+## Submit all runs in 'runstoprocess' to caf queue
 ```bash
 ./suballruns.sh v6
 ```
 
 ##############################################################
 
-How to run RECO on streamer (raw) files
+## How to run RECO on streamer (raw) files
 
 ```bash
 cmsrel CMSSW_7_5_5_patch4

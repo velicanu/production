@@ -43,8 +43,9 @@ process.source = cms.Source("PoolSource",
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents))
 
-# import FWCore.PythonUtilities.LumiList as LumiList
+import FWCore.PythonUtilities.LumiList as LumiList
 # process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/HI/DCSOnly/json_DCSONLY.txt').getVLuminosityBlockRange()
+process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/CMSSW_7_5_5_patch4/src/production/HIRun2015ForestingSetup_v0/ls100.txt').getVLuminosityBlockRange()
 
 #####################################################################################
 # Load Global Tag, Geometry, etc.
@@ -123,15 +124,35 @@ process.TFileService = cms.Service("TFileService",
 
 
 
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu3CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs3CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu3PFJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs3PFJetSequence_PbPb_data_bTag_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu4CaloJetSequence_PbPb_data_bTag_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs4CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu4PFJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs4PFJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu5CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs5CaloJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu5PFJetSequence_PbPb_data_bTag_cff')
+process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs5PFJetSequence_PbPb_data_bTag_cff')
 
 
 process.jetSequences = cms.Sequence(
 # process.ak3CaloJetSequence +
                                     # process.ak3PFJetSequence +
+                                    process.akVs3CaloJetSequence +
+                                    process.akPu3CaloJetSequence +
+                                    process.akVs3PFJetSequence +
+                                    process.akPu3PFJetSequence +
                                     process.akVs4CaloJetSequence +
-                                    process.akPu4CaloJetSequence
+                                    process.akPu4CaloJetSequence +
+                                    process.akVs4PFJetSequence +
+                                    process.akPu4PFJetSequence +
+                                    process.akVs5CaloJetSequence +
+                                    process.akPu5CaloJetSequence +
+                                    process.akVs5PFJetSequence +
+                                    process.akPu5PFJetSequence
                                     # process.ak4CaloJetSequence +
                                     # process.ak4PFJetSequence
 
@@ -342,6 +363,7 @@ process.phfNegFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTower
 
 
 process.pAna = cms.EndPath(process.skimanalysis)
+# process.pAna = cms.Path(process.skimanalysis)
 
 # Customization
 
@@ -352,8 +374,8 @@ process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
 
 
 # filter all path with the production filter sequence
-for path in process.paths:
-    getattr(process,path)._seq = process.hltMinBias * getattr(process,path)._seq
+# for path in process.paths:
+    # getattr(process,path)._seq = process.hltMinBias * getattr(process,path)._seq
 
     
     

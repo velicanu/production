@@ -269,13 +269,20 @@ process.rechitanalyzer.HFlongMin = -9999
 process.rechitanalyzer.HFshortMin = -9999
 process.rechitanalyzer.HFtowerMin = -9999
 
+import HLTrigger.HLTfilters.hltHighLevel_cfi
+
+process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
+
+
 
 process.write_FEVT = cms.OutputModule("PoolOutputModule",
     dataset = cms.untracked.PSet(
         dataTier = cms.untracked.string('FEVT'),
-        filterName = cms.untracked.string('HLT_HIL1MinimumBiasHF1AND_v1')
+        filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
+    SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('ana_step')),
     fileName = cms.untracked.string(options.outputFile),
     outputCommands = cms.untracked.vstring( ('drop *', 
         'drop *', 
@@ -720,12 +727,6 @@ process.pAna = cms.EndPath(process.write_FEVT)
 # process.pAna = cms.Path(process.skimanalysis)
 
 # Customization
-
-import HLTrigger.HLTfilters.hltHighLevel_cfi
-
-process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
-process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
-
 
 # filter all path with the production filter sequence
 for path in process.paths:

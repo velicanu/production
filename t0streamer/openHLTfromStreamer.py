@@ -8,7 +8,7 @@ process.options = cms.untracked.PSet(
 #####################################################################################
                             
 process.source = cms.Source("NewEventStreamFileReader",
-    fileNames = cms.untracked.vstring('root://eoscms.cern.ch///store/t0streamer/Data/Express/000/261/396/run261396_ls0001_streamExpress_StorageManager.dat'
+    fileNames = cms.untracked.vstring('root://cms-xrd-global.cern.ch//eos/cms/store/t0streamer/Data/HIPhysicsMinBiasUPC/000/262/548/run262548_ls0118_streamHIPhysicsMinBiasUPC_StorageManager.dat'
   )
 )
 

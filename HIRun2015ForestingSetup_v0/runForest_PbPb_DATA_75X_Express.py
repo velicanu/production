@@ -45,7 +45,7 @@ process.maxEvents = cms.untracked.PSet(
 
 import FWCore.PythonUtilities.LumiList as LumiList
 # process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/HI/DCSOnly/json_DCSONLY.txt').getVLuminosityBlockRange()
-process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/CMSSW_7_5_5_patch4/src/production/HIRun2015ForestingSetup_v0/ls100.txt').getVLuminosityBlockRange()
+# process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/CMSSW_7_5_5_patch4/src/production/HIRun2015ForestingSetup_v0/ls100.txt').getVLuminosityBlockRange()
 
 #####################################################################################
 # Load Global Tag, Geometry, etc.
@@ -101,14 +101,14 @@ process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
 process.centralityBin.Centrality = cms.InputTag("hiCentrality")
 process.centralityBin.centralityVariable = cms.string("HFtowers")
 
-process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
-process.GlobalTag.toGet.extend([
-  cms.PSet(record = cms.string("HeavyIonRcd"),
-     tag = cms.string("CentralityTable_HFtowers200_Glauber2015A_v750x01_offline"),
-     connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-     label = cms.untracked.string("HFtowers")
-  ),
-])
+# process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+# process.GlobalTag.toGet.extend([
+  # cms.PSet(record = cms.string("HeavyIonRcd"),
+     # tag = cms.string("CentralityTable_HFtowers200_Glauber2015A_v750x01_offline"),
+     # connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+     # label = cms.untracked.string("HFtowers")
+  # ),
+# ])
 
 #####################################################################################
 # Define tree output
@@ -216,7 +216,7 @@ process.simRctUpgradeFormatDigis.regionTag = cms.InputTag("caloStage1Digis")
 process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
 process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker")
 
-process.p1 = cms.Sequence(
+process.L1Sequence = cms.Sequence(
     process.caloStage1Digis +
     process.simRctUpgradeFormatDigis +
     process.simCaloStage1Digis +
@@ -224,7 +224,6 @@ process.p1 = cms.Sequence(
     )
 
 
-process.caloStage1Params.centralityLUTFile = cms.FileInPath("L1Trigger/L1TCalorimeter/data/centrality_extended_LUT_preRun.txt")
 
 process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
                                          InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
@@ -247,13 +246,7 @@ process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
 )
 
 
-process.p2 = cms.Sequence(process.UnpackerResults + process.EmulatorResults)
-
-# process.L1EmulatorUnpacker = cms.Sequence(process.EmulatorResults + process.UnpackerResults)
-
-# process.schedule = cms.Schedule(
-    # process.p1, process.p2
-    # )
+process.L1EmulatorUnpacker = cms.Sequence(process.UnpackerResults + process.EmulatorResults)
 
 AddCaloMuon = False
 runOnMC = False
@@ -299,8 +292,8 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
-                            process.p1 +
-                            process.p2 +
+                            process.L1Sequence +
+                            process.L1EmulatorUnpacker +
                             process.finderSequence +
                             process.rechitanalyzer +
                             process.hltMuTree + 

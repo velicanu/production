@@ -11,6 +11,6 @@ cmsRun skimTriggersEventContent.py maxEvents=100 inputFiles=root://cms-xrd-globa
 ### Submit to cafqueue
 
 ```bash
-# add --proxy=proxyforprod after you've ran this once, put your password, and see a new proxyforprod file in your directory
+# add --proxy=proxyforprod after you've ran this once and see a new proxyforprod file in your directory
 python submitskimTriggersEventContent.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/eventsize/HIPhysicsMinBiasUPC/v2/ -i HIPhysicsMinBiasUPC.262548.list 
 ```

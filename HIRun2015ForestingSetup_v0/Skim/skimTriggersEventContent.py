@@ -59,38 +59,6 @@ from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
 
-
-##########################################JEC##########################################
-from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb5020
-process = overrideJEC_PbPb5020(process)
-##########################################JEC##########################################
-
-
-##########################################UE##########################################
-from CondCore.DBCommon.CondDBSetup_cfi import *
-process.uetable = cms.ESSource("PoolDBESSource",
-      DBParameters = cms.PSet(
-        messageLevel = cms.untracked.int32(0)
-        ),
-      timetype = cms.string('runnumber'),
-      toGet = cms.VPSet(
-          cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_Calo_v00_express"),
-                   label = cms.untracked.string("UETable_PF")
-          ),
-          cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_PF_v00_express"),
-                   label = cms.untracked.string("UETable_Calo")
-          )
-      ), 
-      connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
-)
-process.es_prefer_uetable = cms.ESPrefer('PoolDBESSource','uetable')
-##########################################UE##########################################
-
-
-
-
 #####################################################################################
 # Define tree output
 #####################################################################################
@@ -553,6 +521,25 @@ process.write_FEVT = cms.OutputModule("PoolOutputModule",
         'keep recoTracksToOnerecoTracksAssociation_retevMuons_*_*', 
         'keep FEDRawDataCollection_rawDataRepacker_*_*', 
         'keep FEDRawDataCollection_virginRawDataRepacker_*_*' ) ),
+    splitLevel = cms.untracked.int32(0)
+)
+
+
+
+process.write_RAW = cms.OutputModule("PoolOutputModule",
+    dataset = cms.untracked.PSet(
+        dataTier = cms.untracked.string('RAW'),
+        filterName = cms.untracked.string('')
+    ),
+    eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
+    # SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1MinimumBiasHF1AND_v1')),
+    fileName = cms.untracked.string('RAW_%s_.root' % options.outputFile),
+    outputCommands = cms.untracked.vstring( ('drop *', 
+        'keep FEDRawDataCollection_rawDataRepacker_*_*', 
+        'keep FEDRawDataCollection_virginRawDataRepacker_*_*' ,
+        'keep L1GlobalTriggerObjectMapRecord_hltL1GtObjectMap_*_*', 
+        'keep edmTriggerResults_TriggerResults_*_HLT',
+        'keep triggerTriggerEvent_hltTriggerSummaryAOD_*_*') ),
     splitLevel = cms.untracked.int32(0)
 )
 
@@ -1253,6 +1240,9 @@ process.write_RECOHLT_HIL1MinimumBiasHF1AND_v1.fileName = cms.untracked.string('
 process.write_AODHLT_HIL1MinimumBiasHF1AND_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1MinimumBiasHF1AND_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1MinimumBiasHF1AND_v1'))
 process.write_AODHLT_HIL1MinimumBiasHF1AND_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1MinimumBiasHF1AND_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1MinimumBiasHF1AND_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1MinimumBiasHF1AND_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1MinimumBiasHF1AND_v1'))
+process.write_RAWHLT_HIL1MinimumBiasHF1AND_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1MinimumBiasHF1AND_v1.root' % options.outputFile)
 
 
 process.write_FEVTHLT_HIL1Centralityext30100HFplusANDminusTH0_v1 = process.write_FEVT.clone()
@@ -1264,6 +1254,9 @@ process.write_RECOHLT_HIL1Centralityext30100HFplusANDminusTH0_v1.fileName = cms.
 process.write_AODHLT_HIL1Centralityext30100HFplusANDminusTH0_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1Centralityext30100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext30100HFplusANDminusTH0_v1'))
 process.write_AODHLT_HIL1Centralityext30100HFplusANDminusTH0_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1Centralityext30100HFplusANDminusTH0_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1Centralityext30100HFplusANDminusTH0_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1Centralityext30100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext30100HFplusANDminusTH0_v1'))
+process.write_RAWHLT_HIL1Centralityext30100HFplusANDminusTH0_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1Centralityext30100HFplusANDminusTH0_v1.root' % options.outputFile)
 
 
 process.write_FEVTHLT_HIL1Centralityext50100HFplusANDminusTH0_v1 = process.write_FEVT.clone()
@@ -1275,6 +1268,10 @@ process.write_RECOHLT_HIL1Centralityext50100HFplusANDminusTH0_v1.fileName = cms.
 process.write_AODHLT_HIL1Centralityext50100HFplusANDminusTH0_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1Centralityext50100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext50100HFplusANDminusTH0_v1'))
 process.write_AODHLT_HIL1Centralityext50100HFplusANDminusTH0_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1Centralityext50100HFplusANDminusTH0_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1Centralityext50100HFplusANDminusTH0_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1Centralityext50100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext50100HFplusANDminusTH0_v1'))
+process.write_RAWHLT_HIL1Centralityext50100HFplusANDminusTH0_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1Centralityext50100HFplusANDminusTH0_v1.root' % options.outputFile)
+
 
 
 process.write_FEVTHLT_HIL1Centralityext70100HFplusANDminusTH0_v1 = process.write_FEVT.clone()
@@ -1286,6 +1283,9 @@ process.write_RECOHLT_HIL1Centralityext70100HFplusANDminusTH0_v1.fileName = cms.
 process.write_AODHLT_HIL1Centralityext70100HFplusANDminusTH0_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1Centralityext70100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext70100HFplusANDminusTH0_v1'))
 process.write_AODHLT_HIL1Centralityext70100HFplusANDminusTH0_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1Centralityext70100HFplusANDminusTH0_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1Centralityext70100HFplusANDminusTH0_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1Centralityext70100HFplusANDminusTH0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1Centralityext70100HFplusANDminusTH0_v1'))
+process.write_RAWHLT_HIL1Centralityext70100HFplusANDminusTH0_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1Centralityext70100HFplusANDminusTH0_v1.root' % options.outputFile)
 
 
 process.write_FEVTHLT_HIL1DoubleMu0_v1 = process.write_FEVT.clone()
@@ -1297,6 +1297,9 @@ process.write_RECOHLT_HIL1DoubleMu0_v1.fileName = cms.untracked.string('RECO_%s_
 process.write_AODHLT_HIL1DoubleMu0_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1DoubleMu0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1DoubleMu0_v1'))
 process.write_AODHLT_HIL1DoubleMu0_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1DoubleMu0_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1DoubleMu0_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1DoubleMu0_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1DoubleMu0_v1'))
+process.write_RAWHLT_HIL1DoubleMu0_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1DoubleMu0_v1.root' % options.outputFile)
 
 
 process.write_FEVTHLT_HIL1DoubleMu0_Cent30_v1 = process.write_FEVT.clone()
@@ -1308,6 +1311,9 @@ process.write_RECOHLT_HIL1DoubleMu0_Cent30_v1.fileName = cms.untracked.string('R
 process.write_AODHLT_HIL1DoubleMu0_Cent30_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL1DoubleMu0_Cent30_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1DoubleMu0_Cent30_v1'))
 process.write_AODHLT_HIL1DoubleMu0_Cent30_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL1DoubleMu0_Cent30_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL1DoubleMu0_Cent30_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL1DoubleMu0_Cent30_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1DoubleMu0_Cent30_v1'))
+process.write_RAWHLT_HIL1DoubleMu0_Cent30_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL1DoubleMu0_Cent30_v1.root' % options.outputFile)
 
 
 process.write_FEVTHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1 = process.write_FEVT.clone()
@@ -1319,6 +1325,9 @@ process.write_RECOHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.fileName = cms.untrac
 process.write_AODHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1 = process.write_AOD.clone()
 process.write_AODHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1'))
 process.write_AODHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.fileName = cms.untracked.string('AOD_%s_HLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.root' % options.outputFile)
+process.write_RAWHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1 = process.write_RAW.clone()
+process.write_RAWHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1'))
+process.write_RAWHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.fileName = cms.untracked.string('RAW_%s_HLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1.root' % options.outputFile)
 
 
 
@@ -1326,24 +1335,31 @@ process.pAna = cms.EndPath(
                               process.write_FEVTHLT_HIL1MinimumBiasHF1AND_v1
                             + process.write_RECOHLT_HIL1MinimumBiasHF1AND_v1
                             + process.write_AODHLT_HIL1MinimumBiasHF1AND_v1
+                            + process.write_RAWHLT_HIL1MinimumBiasHF1AND_v1
                             + process.write_FEVTHLT_HIL1Centralityext30100HFplusANDminusTH0_v1
                             + process.write_RECOHLT_HIL1Centralityext30100HFplusANDminusTH0_v1
                             + process.write_AODHLT_HIL1Centralityext30100HFplusANDminusTH0_v1
+                            + process.write_RAWHLT_HIL1Centralityext30100HFplusANDminusTH0_v1
                             + process.write_FEVTHLT_HIL1Centralityext50100HFplusANDminusTH0_v1
                             + process.write_RECOHLT_HIL1Centralityext50100HFplusANDminusTH0_v1
                             + process.write_AODHLT_HIL1Centralityext50100HFplusANDminusTH0_v1
+                            + process.write_RAWHLT_HIL1Centralityext50100HFplusANDminusTH0_v1
                             + process.write_FEVTHLT_HIL1Centralityext70100HFplusANDminusTH0_v1
                             + process.write_RECOHLT_HIL1Centralityext70100HFplusANDminusTH0_v1
                             + process.write_AODHLT_HIL1Centralityext70100HFplusANDminusTH0_v1
+                            + process.write_RAWHLT_HIL1Centralityext70100HFplusANDminusTH0_v1
                             + process.write_FEVTHLT_HIL1DoubleMu0_v1
                             + process.write_RECOHLT_HIL1DoubleMu0_v1
                             + process.write_AODHLT_HIL1DoubleMu0_v1
+                            + process.write_RAWHLT_HIL1DoubleMu0_v1
                             + process.write_FEVTHLT_HIL1DoubleMu0_Cent30_v1
                             + process.write_RECOHLT_HIL1DoubleMu0_Cent30_v1
                             + process.write_AODHLT_HIL1DoubleMu0_Cent30_v1
+                            + process.write_RAWHLT_HIL1DoubleMu0_Cent30_v1
                             + process.write_FEVTHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1
                             + process.write_RECOHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1
                             + process.write_AODHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1
+                            + process.write_RAWHLT_HIL2DoubleMu0_2HF_Cent30100_NHitQ_v1
 
 
 

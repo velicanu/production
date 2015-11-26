@@ -74727,7 +74727,7 @@ process.MuonUpdatorAtVertexAnyDirection = cms.PSet(
 
 process.OutALCARECODtCalib = cms.PSet(
     SelectEvents = cms.untracked.PSet(
-        SelectEvents = cms.vstring('pathALCARECODtCalib')
+        SelectEvents = cms.vstring('reconstruction_step')
     ),
     outputCommands = cms.untracked.vstring('drop *', 
         'keep *_dt4DSegments_*_*', 
@@ -92177,3 +92177,19 @@ process.multPhiCorr_METDiagnostics = cms.VPSet(cms.PSet(
     ))
 
 process.schedule = cms.Schedule(*[ process.raw2digi_step, process.L1Reco_step, process.reconstruction_step, process.pathALCARECOSiStripCalMinBias, process.pathALCARECOTkAlMinBiasHI, process.dqmoffline_step, process.endjob_step, process.write_FEVT_step, process.write_ALCARECO_step ])
+
+
+
+import HLTrigger.HLTfilters.hltHighLevel_cfi
+
+process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+process.hltMinBias.HLTPaths = ["HLT_HIL1Centralityext50100HFplusANDminusTH0_v1"]
+
+
+# filter all path with the production filter sequence
+for path in process.paths:
+    getattr(process,path)._seq = process.hltMinBias * getattr(process,path)._seq
+
+    
+    
+

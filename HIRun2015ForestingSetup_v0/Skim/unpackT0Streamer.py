@@ -59,17 +59,19 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 	# getattr(process,path)._seq = process.GoodEventFilterSequence * getattr(process,path)._seq 
 
 
+import HLTrigger.HLTfilters.hltHighLevel_cfi
+
+process.hHLT_HIL1MinimumBiasHF1AND_v1 = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+process.hHLT_HIL1MinimumBiasHF1AND_v1.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
+process.pass_hHLT_HIL1MinimumBiasHF1AND_v1     = cms.Path(process.hHLT_HIL1MinimumBiasHF1AND_v1 )
+
 process.makeEdm = cms.OutputModule("PoolOutputModule",
-                                         dataset = cms.untracked.PSet(
-        dataTier = cms.untracked.string('USER')),
-          outputCommands = cms.untracked.vstring('keep *'),
-          SelectEvents = cms.untracked.PSet(  SelectEvents = cms.vstring(
-            'HLT_HIL1Centralityext70100HFplusANDminusTH0_v1' ) ),
-          fileName = cms.untracked.string(options.outputFile))
-
-
+      dataset = cms.untracked.PSet(
+      dataTier = cms.untracked.string('USER')),
+      outputCommands = cms.untracked.vstring('keep *'),
+      SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1MinimumBiasHF1AND_v1')),
+      fileName = cms.untracked.string(options.outputFile))
 
 process.this_is_the_end = cms.EndPath( process.makeEdm )
-  
   
   

@@ -35,7 +35,7 @@ process.options = cms.untracked.PSet()
 
 # Other statements
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
 process.load('L1Trigger.L1TCalorimeter.caloConfigStage1HI_cfi')
 process.load('L1Trigger.L1TCalorimeter.L1TCaloStage1_cff')

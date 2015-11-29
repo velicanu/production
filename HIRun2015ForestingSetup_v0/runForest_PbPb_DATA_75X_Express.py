@@ -137,10 +137,16 @@ process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs5CaloJetSequence_PbPb_data_
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu5PFJetSequence_PbPb_data_bTag_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs5PFJetSequence_PbPb_data_bTag_cff')
 
+process.PureTracks = cms.EDFilter("TrackSelector",
+                       src = cms.InputTag("hiGeneralTracks"),
+                       cut = cms.string('quality("highPurity")'))
+
+
 
 process.jetSequences = cms.Sequence(
 # process.ak3CaloJetSequence +
                                     # process.ak3PFJetSequence +
+                                    process.PureTracks +
                                     process.akVs3CaloJetSequence +
                                     process.akPu3CaloJetSequence +
                                     process.akVs3PFJetSequence +
@@ -282,10 +288,31 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
                                                        )
 
 
+# re-reco zdc from the new castorDigis
+process.load('RecoLocalCalo.HcalRecProducers.HcalHitReconstructor_zdc_cfi')
+process.zdcreco.digiLabel = cms.InputTag("castorDigis") # was hcalDigis
+# redo centrality
+process.load('RecoHI.HiCentralityAlgos.HiCentrality_cfi')
+process.newHiCentrality = process.hiCentrality.clone()
+process.newHiCentrality.produceHFhits = cms.bool(False)
+process.newHiCentrality.produceHFtowers = cms.bool(False)
+process.newHiCentrality.produceEcalhits = cms.bool(False)
+process.newHiCentrality.produceZDChits = cms.bool(True)
+process.newHiCentrality.produceETmidRapidity = cms.bool(False)
+process.newHiCentrality.producePixelhits = cms.bool(False)
+process.newHiCentrality.produceTracks = cms.bool(False)
+process.newHiCentrality.producePixelTracks = cms.bool(False)
+process.newHiCentrality.reUseCentrality = cms.bool(True)
+process.newHiCentrality.srcReUse = cms.InputTag("hiCentrality")
 
+process.hiEvtAnalyzer.CentralitySrc = cms.InputTag("newHiCentrality")
+                                                       
+                                                       
 process.ana_step = cms.Path(
                             process.hltanalysis *
                             # process.hltobject +
+                            process.zdcreco *
+                            process.newHiCentrality * 
                             process.centralityBin * 
                             process.hiEvtAnalyzer*
                             process.jetSequences +

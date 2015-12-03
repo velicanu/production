@@ -275,6 +275,8 @@ process.rechitanalyzer.HFlongMin = -9999
 process.rechitanalyzer.HFshortMin = -9999
 process.rechitanalyzer.HFtowerMin = -9999
 
+process.load("HeavyIonsAnalysis.JetAnalysis.hcalNoise_cff")
+
 
 
 
@@ -316,6 +318,7 @@ process.ana_step = cms.Path(
                             process.centralityBin * 
                             process.hiEvtAnalyzer*
                             process.jetSequences +
+                            process.hcalNoise +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +

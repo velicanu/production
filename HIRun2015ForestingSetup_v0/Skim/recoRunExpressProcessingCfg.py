@@ -11,12 +11,9 @@ options.register ('isPP',
                   "Flag if this is a pp simulation")
 options.parseArguments()
 
-
 process.source = cms.Source("PoolSource",
-                            duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
-                           fileNames = cms.untracked.vstring(options.inputFiles[0])                            
+                           fileNames = cms.untracked.vstring(options.inputFiles[0])
 )
-
 process.ALCARECOCalibrationTracksRefit = cms.EDProducer("TrackRefitter",
     AlgorithmName = cms.string('undefAlgorithm'),
     Fitter = cms.string('KFFittingSmootherWithOutliersRejectionAndRK'),
@@ -40898,6 +40895,20 @@ process.LooseMuonEfficiencyAnalyzer = cms.EDAnalyzer("EfficiencyAnalyzer",
 )
 
 
+process.MEtoMEComparitor = cms.EDAnalyzer("MEtoMEComparitor",
+    Diffgoodness = cms.double(0.1),
+    KSgoodness = cms.double(0.9),
+    MEtoEDMLabel = cms.string('MEtoEDMConverter'),
+    OverAllgoodness = cms.double(0.9),
+    autoProcess = cms.bool(True),
+    dirDepth = cms.uint32(1),
+    lumiInstance = cms.string('MEtoEDMConverterLumi'),
+    processNew = cms.string('RERECO'),
+    processRef = cms.string('HLT'),
+    runInstance = cms.string('MEtoEDMConverterRun')
+)
+
+
 process.MediumMuonEfficiencyAnalyzer = cms.EDAnalyzer("EfficiencyAnalyzer",
     BeamSpotLabel = cms.InputTag("offlineBeamSpot"),
     ID = cms.string('Medium'),
@@ -59358,76 +59369,14 @@ process.zmumugammaOldAnalysis = cms.EDAnalyzer("ZToMuMuGammaAnalyzer",
 )
 
 
-process.write_ALCARECO = cms.OutputModule("PoolOutputModule",
-    SelectEvents = cms.untracked.PSet(
-        SelectEvents = cms.vstring('pathALCARECOSiStripCalMinBias', 
-            'pathALCARECOTkAlMinBiasHI')
-    ),
+process.write_RECO = cms.OutputModule("PoolOutputModule",
     dataset = cms.untracked.PSet(
-        dataTier = cms.untracked.string('ALCARECO'),
-        filterName = cms.untracked.string('StreamALCACombined')
-    ),
-    eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-    fileName = cms.untracked.string('output_inALCARECO.root'),
-    outputCommands = cms.untracked.vstring('drop *', 
-        'keep edmTriggerResults_*_*_*', 
-        'drop *_MEtoEDMConverter_*_*', 
-        'keep *_ALCARECOSiStripCalMinBias_*_*', 
-        'keep *_siStripClusters_*_*', 
-        'keep *_siPixelClusters_*_*', 
-        'keep DetIdedmEDCollection_siStripDigis_*_*', 
-        'keep L1AcceptBunchCrossings_*_*_*', 
-        'keep L1GlobalTriggerReadoutRecord_gtDigis_*_*', 
-        'keep *_TriggerResults_*_*', 
-        'keep *_ALCARECOTkAlMinBiasHI_*_*', 
-        'keep L1AcceptBunchCrossings_*_*_*', 
-        'keep L1GlobalTriggerReadoutRecord_gtDigis_*_*', 
-        'keep *_TriggerResults_*_*', 
-        'keep DcsStatuss_scalersRawToDigi_*_*', 
-        'keep *_hiSelectedVertex_*_*', 
-        'keep *_offlineBeamSpot_*_*'),
-    splitLevel = cms.untracked.int32(0)
-)
-
-
-process.write_DQMIO = cms.OutputModule("DQMRootOutputModule",
-    dataset = cms.untracked.PSet(
-        dataTier = cms.untracked.string('DQMIO'),
-        filterName = cms.untracked.string('')
-    ),
-    fileName = cms.untracked.string('output_inDQMIO.root'),
-    outputCommands = cms.untracked.vstring('drop *', 
-        'keep *_MEtoEDMConverter_*_*'),
-    splitLevel = cms.untracked.int32(0)
-)
-
-import HLTrigger.HLTfilters.hltHighLevel_cfi
-
-process.hHLT_HIL1MinimumBiasHF1AND_v1 = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
-process.hHLT_HIL1MinimumBiasHF1AND_v1.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
-process.pass_hHLT_HIL1MinimumBiasHF1AND_v1     = cms.Path(process.hHLT_HIL1MinimumBiasHF1AND_v1 )
-
-
-process.write_FEVT = cms.OutputModule("PoolOutputModule",
-    dataset = cms.untracked.PSet(
-        dataTier = cms.untracked.string('FEVT'),
+        dataTier = cms.untracked.string('RECO'),
         filterName = cms.untracked.string('')
     ),
     fileName = cms.untracked.string(options.outputFile),
-    # SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('pass_hHLT_HIL1MinimumBiasHF1AND_v1')),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     outputCommands = cms.untracked.vstring( ('drop *', 
-        'drop *', 
-        'keep  FEDRawDataCollection_rawDataCollector_*_*', 
-        'keep  FEDRawDataCollection_source_*_*', 
-        'keep  FEDRawDataCollection_rawDataCollector_*_*', 
-        'keep  FEDRawDataCollection_source_*_*', 
-        'drop *_hlt*_*_*', 
-        'keep *_hltL1GtObjectMap_*_*', 
-        'keep FEDRawDataCollection_rawDataCollector_*_*', 
-        'keep FEDRawDataCollection_source_*_*', 
-        'keep edmTriggerResults_*_*_*', 
-        'keep triggerTriggerEvent_*_*_*', 
         'keep DetIdedmEDCollection_siStripDigis_*_*', 
         'keep DetIdedmEDCollection_siPixelDigis_*_*', 
         'keep *_siPixelClusters_*_*', 
@@ -59770,16 +59719,11 @@ process.write_FEVT = cms.OutputModule("PoolOutputModule",
         'keep int_bunchSpacingProducer_*_*', 
         'keep *_hiGeneralTracks_*_*', 
         'keep *_hiGeneralAndPixelTracks_*_*', 
-        'keep *_hiPixel3PrimTracks_*_*', 
-        'keep *_hiPixel3ProtoTracks_*_*', 
-        'keep *_hiSelectedProtoTracks_*_*', 
         'keep recoVertexs_hiPixelMedianVertex_*_*', 
         'keep recoVertexs_hiPixelAdaptiveVertex_*_*', 
         'keep recoVertexs_hiSelectedVertex_*_*', 
         'keep recoVertexs_hiPixelClusterVertex_*_*', 
         'keep *_*_APVCM_*', 
-        'keep *_siStripZeroSuppression_BADAPVBASELINE_*', 
-        'keep SiStripRawDigiedmDetSetVector_siStripZeroSuppression_VirginRaw_*', 
         'keep *_*CaloJets_*_*', 
         'keep *_*PFJets_*_*', 
         'keep *_*HiGenJets_*_*', 
@@ -59817,9 +59761,7 @@ process.write_FEVT = cms.OutputModule("PoolOutputModule",
         'keep recoTrackExtras_reglobalMuons_*_*', 
         'keep recoTracks_retevMuons_*_*', 
         'keep recoTrackExtras_retevMuons_*_*', 
-        'keep recoTracksToOnerecoTracksAssociation_retevMuons_*_*', 
-        'keep FEDRawDataCollection_rawDataRepacker_*_*', 
-        'keep FEDRawDataCollection_virginRawDataRepacker_*_*' ) ),
+        'keep recoTracksToOnerecoTracksAssociation_retevMuons_*_*' ) ),
     splitLevel = cms.untracked.int32(0)
 )
 
@@ -59867,6 +59809,9 @@ process.dtSources = cms.Sequence(process.dtDataIntegrityUnpacker+process.DTDataI
 
 
 process.ak4L1JPTOffsetCorrectorChain = cms.Sequence(process.ak4CaloL1OffsetCorrector+process.ak4L1JPTOffsetCorrector)
+
+
+process.endOfProcess_withComparison = cms.Sequence(process.MEtoEDMConverter+process.MEtoMEComparitor)
 
 
 process.dtlocalreco = cms.Sequence(process.dt1DRecHits+process.dt4DSegments+process.dt1DCosmicRecHits+process.dt4DCosmicSegments)
@@ -59971,10 +59916,13 @@ process.ctfTracksCombinedSeeds = cms.Sequence(process.MixedLayerPairs+process.gl
 process.electronGsfTrackingHi = cms.Sequence(process.ecalDrivenElectronSeeds+process.electronCkfTrackCandidates+process.electronGsfTracks)
 
 
-process.muonRecoHighLevelPbPb = cms.Sequence(process.muons)
+process.ALCARECOTkAlZMuMuHIDQM = cms.Sequence(process.ALCARECOTkAlZMuMuHITrackingDQM+process.ALCARECOTkAlZMuMuHITkAlDQM)
 
 
 process.seqALCARECODtCalibHI = cms.Sequence(process.ALCARECODtCalibHIHLTFilter+process.dt4DSegmentsNoWire)
+
+
+process.endOfProcess = cms.Sequence(process.MEtoEDMConverter)
 
 
 process.gedGsfElectronSequenceTmp = cms.Sequence(process.gedGsfElectronCores+process.gedGsfElectronsTmp)
@@ -60580,7 +60528,7 @@ process.seqL1TriggerObjHfBitCountsQualityTests = cms.Sequence(process.l1TriggerO
 process.electronGsfTracking = cms.Sequence(process.electronSeeds+process.electronCkfTrackCandidates+process.electronGsfTracks)
 
 
-process.ALCARECOTkAlZMuMuHIDQM = cms.Sequence(process.ALCARECOTkAlZMuMuHITrackingDQM+process.ALCARECOTkAlZMuMuHITkAlDQM)
+process.muonRecoHighLevelPbPb = cms.Sequence(process.muons)
 
 
 process.standalonemuontracking = cms.Sequence(process.standAloneMuonSeeds+process.standAloneMuons+process.refittedStandAloneMuons+process.displacedMuonSeeds+process.displacedStandAloneMuons)
@@ -61453,27 +61401,16 @@ process.pathALCARECOPromptCalibProdSiPixelAli = cms.Path(process.seqALCARECOProm
 process.dqmoffline_step = cms.Path(process.DQMOfflineHeavyIons)
 
 
-process.write_FEVT_step = cms.EndPath(process.write_FEVT)
+process.endjob_step = cms.EndPath(process.endOfProcess)
 
 
-process.write_DQMIO_step = cms.EndPath(process.write_DQMIO)
-
-
-process.write_ALCARECO_step = cms.EndPath(process.write_ALCARECO)
+process.write_RECO_step = cms.EndPath(process.write_RECO)
 
 
 process.DBService = cms.Service("DBService")
 
 
-process.DQMStore = cms.Service("DQMStore",
-    LSbasedMode = cms.untracked.bool(False),
-    collateHistograms = cms.untracked.bool(False),
-    enableMultiThread = cms.untracked.bool(False),
-    forceResetOnBeginLumi = cms.untracked.bool(False),
-    referenceFileName = cms.untracked.string(''),
-    verbose = cms.untracked.int32(0),
-    verboseQT = cms.untracked.int32(0)
-)
+process.DQMStore = cms.Service("DQMStore")
 
 
 process.FastTimerService = cms.Service("FastTimerService",
@@ -92312,4 +92249,4 @@ process.multPhiCorr_METDiagnostics = cms.VPSet(cms.PSet(
         type = cms.int32(7)
     ))
 
-process.schedule = cms.Schedule(*[ process.raw2digi_step, process.L1Reco_step, process.reconstruction_step, process.pathALCARECOSiStripCalMinBias, process.pathALCARECOTkAlMinBiasHI, process.dqmoffline_step, process.write_FEVT_step, process.write_DQMIO_step, process.write_ALCARECO_step ])
+process.schedule = cms.Schedule(*[ process.raw2digi_step, process.L1Reco_step, process.reconstruction_step, process.pathALCARECOSiStripCalMinBias, process.pathALCARECOTkAlMinBiasHI, process.dqmoffline_step, process.endjob_step, process.write_RECO_step])

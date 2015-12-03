@@ -44,8 +44,8 @@ python submitForestExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velica
 ## How to run RECO on streamer (raw) files
 
 ```bash
-cmsrel CMSSW_7_5_5_patch4
-cd CMSSW_7_5_5_patch4/src
+cmsrel CMSSW_7_5_7_patch1
+cd CMSSW_7_5_7_patch1/src
 cmsenv
 git cms-addpkg Configuration/DataProcessing
 scram build -j8

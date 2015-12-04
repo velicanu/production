@@ -45,6 +45,7 @@ process.maxEvents = cms.untracked.PSet(
 
 import FWCore.PythonUtilities.LumiList as LumiList
 process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/HI/DCSOnly/json_DCSONLY.txt').getVLuminosityBlockRange()
+# process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/user/v/velicanu/mylist.json').getVLuminosityBlockRange()
 # process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/CMSSW_7_5_5_patch4/src/production/HIRun2015ForestingSetup_v0/ls100.txt').getVLuminosityBlockRange()
 
 #####################################################################################
@@ -390,10 +391,10 @@ process.pAna = cms.EndPath(process.skimanalysis)
 
 # Customization
 
-import HLTrigger.HLTfilters.hltHighLevel_cfi
+# import HLTrigger.HLTfilters.hltHighLevel_cfi
 
-process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
-process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
+# process.hltMinBias = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+# process.hltMinBias.HLTPaths = ["HLT_HIL1MinimumBiasHF1AND_v1"]
 
 
 # filter all path with the production filter sequence

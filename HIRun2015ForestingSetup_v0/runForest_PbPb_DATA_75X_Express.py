@@ -25,7 +25,7 @@ import subprocess
 version = subprocess.Popen(["(cd $CMSSW_BASE/src && git describe --tags)"], stdout=subprocess.PIPE, shell=True).stdout.read()
 if version == '':
     version = 'no git info'
-process.HiForest.HiForestVersion = cms.untracked.string(version)
+process.HiForest.HiForestVersion = cms.string(version)
 
 #####################################################################################
 # Input source
@@ -173,10 +173,12 @@ process.jetSequences = cms.Sequence(
                                     
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
+from HeavyIonsAnalysis.EventAnalysis.dummybranches_cff import addHLTdummybranches
+addHLTdummybranches(process)
+
 ############ hlt oject
 process.load("HeavyIonsAnalysis.EventAnalysis.hltobject_cfi")
 process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
-process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("gtDigis","","HLT")
 
 #####################################################################################
 # To be cleaned

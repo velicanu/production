@@ -25,7 +25,7 @@ import subprocess
 version = subprocess.Popen(["(cd $CMSSW_BASE/src && git describe --tags)"], stdout=subprocess.PIPE, shell=True).stdout.read()
 if version == '':
     version = 'no git info'
-process.HiForest.HiForestVersion = cms.untracked.string(version)
+process.HiForest.HiForestVersion = cms.string(version)
 
 #####################################################################################
 # Input source
@@ -112,6 +112,7 @@ process.jetSequences = cms.Sequence(
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.hiEvtAnalyzer.CentralitySrc = cms.InputTag("pACentrality")
 process.hiEvtAnalyzer.Vertex = cms.InputTag("offlinePrimaryVertices")
+process.hiEvtAnalyzer.doCentrality = cms.bool(False)
 process.hiEvtAnalyzer.doEvtPlane = cms.bool(False)
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
 ############ hlt oject
@@ -169,7 +170,7 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
 
 process.ana_step = cms.Path(
                             process.hltanalysis *
-                            process.siPixelRecHits * process.pACentrality * process.centralityBin * #for pp data only on reco
+                            # process.siPixelRecHits * process.pACentrality * process.centralityBin * #for pp data only on reco
                             process.hiEvtAnalyzer*
                             process.jetSequences +
                             process.ggHiNtuplizer +
@@ -202,21 +203,23 @@ process.NoScraping = cms.EDFilter("FilterOutScraping",
 process.load('RecoHI.HiCentralityAlgos.HiClusterCompatibility_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.HIClusterCompatibilityFilter_cfi')
 process.clusterCompatibilityFilter.clusterPars = cms.vdouble(0.0,0.006)
-
+'''
 process.PAcollisionEventSelection = cms.Sequence(process.hfCoincFilter *
                                          process.PAprimaryVertexFilter *
                                          process.NoScraping 
                                          )
 
 process.PAcollisionEventSelection = cms.Path(process.PAcollisionEventSelection)
+'''
 process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
-
+'''
 process.pClusterCompaitiblityFilter = cms.Path(process.siPixelRecHits*process.hiClusterCompatibility * process.clusterCompatibilityFilter)
+'''
 process.pPAprimaryVertexFilter = cms.Path(process.PAprimaryVertexFilter)
-process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
+# process.phltPixelClusterShapeFilter = cms.Path(process.siPixelRecHits*process.hltPixelClusterShapeFilter )
 process.pBeamScrapingFilter=cms.Path(process.NoScraping)
-
+'''
 process.phfCoincFilter = cms.Path(process.hfCoincFilter )
 process.phfCoincFilter3 = cms.Path(process.hfCoincFilter3 )
 
@@ -228,7 +231,7 @@ process.phfPosFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTower
 process.phfNegFilter2 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter2)
 process.phfPosFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfPosFilter)
 process.phfNegFilter1 = cms.Path(process.towersAboveThreshold+process.hfPosTowers+process.hfNegTowers+process.hfNegFilter)
-
+'''
 
 
 

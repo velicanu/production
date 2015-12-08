@@ -39,13 +39,21 @@ python submitForestExpress.py -q cmscaf1nd -o /store/group/phys_heavyions/velica
 ./suballruns.sh v6
 ```
 
+## Submit PbPb forest on AOD
+
+```bash
+# you will need to set set cmscaf1nd to 1nd if you don't have caf permission, set the -o option to your own eos directory, and set -i to a file that looks like HIMinimumBias2.AOD.list but for the data you want to run on
+python submitHIForestAOD.py -q cmscaf1nd -o /store/group/phys_heavyions/velicanu/forest/HIRun2015/HIMinimumBias2/AOD/ -i HIMinimumBias2.AOD.list --proxy=proxyforprod &> HIMinimumBias2.AOD.list.log &
+```
+
+
 ##############################################################
 
 ## How to run RECO on streamer (raw) files
 
 ```bash
-cmsrel CMSSW_7_5_5_patch4
-cd CMSSW_7_5_5_patch4/src
+cmsrel CMSSW_7_5_7_patch1
+cd CMSSW_7_5_7_patch1/src
 cmsenv
 git cms-addpkg Configuration/DataProcessing
 scram build -j8

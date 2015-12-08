@@ -1,0 +1,26 @@
+Will check write permission in the default location /store/user/<username>
+Retrieving DN from proxy...
+DN is: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=velicanu/CN=708329/CN=Dragos Velicanu
+Retrieving username from SiteDB...
+Username is: velicanu
+Validating LFN /store/user/velicanu...
+LFN /store/user/velicanu is valid.
+Will use `gfal-copy`, `gfal-rm` commands for checking write permissions
+Will check write permission in /store/user/velicanu on site T2_US_MIT
+
+Attempting to create (dummy) directory crab3checkwrite_20151207_132835 and copy (dummy) file crab3checkwrite_20151207_132835.tmp to /store/user/velicanu
+
+Executing command: env -i X509_USER_PROXY=/tmp/x509up_u56545 gfal-copy -p -v -t 180 -K ADLER32 file:///afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/test/CMSSW_7_5_7_patch1/src/production/ZJet_MC/PbPb_GENSIM/crab3checkwrite_20151207_132835.tmp 'srm://se01.cmsaf.mit.edu:8443/srm/v2/server?SFN=/mnt/hadoop/cms/store/user/velicanu/crab3checkwrite_20151207_132835/crab3checkwrite_20151207_132835.tmp'
+Please wait...
+Failed running copy command
+  Stdout:
+    Copying 85 bytes file:///afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/test/CMSSW_7_5_7_patch1/src/production/ZJet_MC/PbPb_GENSIM/crab3checkwrite_20151207_132835.tmp => srm://se01.cmsaf.mit.edu:8443/srm/v2/server?SFN=/mnt/hadoop/cms/store/user/velicanu/crab3checkwrite_20151207_132835/crab3checkwrite_20151207_132835.tmp
+    
+  Stderr:
+    gfal-copy error: 2 (No such file or directory) - DESTINATION CHECKSUM globus_ftp_client: the server responded with an error 500 500-Command failed : System error in Failed to open checksum file (host=hibat0083.cmsaf.mit.edu, user=cmsu1702, path=/mnt/hadoop/cms/store/user/velicanu/crab3checkwrite_20151207_132835/crab3checkwrite_20151207_132835.tmp): No such file or directory  500-A system call failed: No such file or directory  500 End.   
+    
+
+Checkwrite Result:
+Unable to check write permission in /store/user/velicanu on site T2_US_MIT
+Please try again later or contact the site administrators sending them the 'crab checkwrite' output as printed above.
+Note: You cannot write to a site if you did not ask permission.

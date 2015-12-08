@@ -25,7 +25,7 @@ import subprocess
 version = subprocess.Popen(["(cd $CMSSW_BASE/src && git describe --tags)"], stdout=subprocess.PIPE, shell=True).stdout.read()
 if version == '':
     version = 'no git info'
-process.HiForest.HiForestVersion = cms.string(version)
+process.HiForest.HiForestVersion = cms.untracked.string(version)
 
 #####################################################################################
 # Input source
@@ -45,7 +45,6 @@ process.maxEvents = cms.untracked.PSet(
 
 import FWCore.PythonUtilities.LumiList as LumiList
 process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/HI/DCSOnly/json_DCSONLY.txt').getVLuminosityBlockRange()
-# process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/user/v/velicanu/mylist.json').getVLuminosityBlockRange()
 # process.source.lumisToProcess = LumiList.LumiList(filename = '/afs/cern.ch/cms/CAF/CMSPHYS/PHYS_HEAVYIONS/cms/CMSSW_7_5_5_patch4/src/production/HIRun2015ForestingSetup_v0/ls100.txt').getVLuminosityBlockRange()
 
 #####################################################################################
@@ -64,7 +63,7 @@ process.load('Configuration.StandardSequences.ReconstructionHeavyIons_cff')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_PromptHI_v3', '')
 
 
 
@@ -173,12 +172,10 @@ process.jetSequences = cms.Sequence(
                                     
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_data_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
-from HeavyIonsAnalysis.EventAnalysis.dummybranches_cff import addHLTdummybranches
-addHLTdummybranches(process)
-
 ############ hlt oject
 process.load("HeavyIonsAnalysis.EventAnalysis.hltobject_cfi")
 process.load("HLTrigger.HLTanalyzers.HLTBitAnalyser_cfi")
+process.hltbitanalysis.l1GtReadoutRecord = cms.InputTag("gtDigis","","HLT")
 
 #####################################################################################
 # To be cleaned
@@ -210,52 +207,6 @@ process.hiTracks.cut = cms.string('quality("highPurity")')
 process.anaTrack.trackSrc = cms.InputTag("hiGeneralTracks")
 
 
-#####################
-# L1 Digis
-#####################
-
-process.load('L1Trigger.L1TCalorimeter.caloConfigStage1HI_cfi')
-process.load('L1Trigger.L1TCalorimeter.L1TCaloStage1_cff')
-process.load('L1Trigger.L1TCalorimeter.caloStage1Params_HI_cfi')
-process.caloStage1Params.minimumBiasThresholds = cms.vint32(1,1,2,2)
-
-process.simRctUpgradeFormatDigis.emTag = cms.InputTag("caloStage1Digis")
-process.simRctUpgradeFormatDigis.regionTag = cms.InputTag("caloStage1Digis")
-
-process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
-process.caloStage1Digis.InputLabel = cms.InputTag("rawDataRepacker")
-
-process.L1Sequence = cms.Sequence(
-    process.caloStage1Digis +
-    process.simRctUpgradeFormatDigis +
-    process.simCaloStage1Digis +
-    process.simCaloStage1FinalDigis
-    )
-
-
-
-process.EmulatorResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
-                                         InputLayer2Collection = cms.InputTag("simCaloStage1FinalDigis"),
-                                         InputLayer2TauCollection = cms.InputTag("simCaloStage1FinalDigis:rlxTaus"),
-                                         InputLayer2IsoTauCollection = cms.InputTag("simCaloStage1FinalDigis:isoTaus"),
-                                         InputLayer2CaloSpareCollection = cms.InputTag("simCaloStage1FinalDigis:HFRingSums"),
-                                         InputLayer2HFBitCountCollection = cms.InputTag("simCaloStage1FinalDigis:HFBitCounts"),
-                                         InputLayer1Collection = cms.InputTag("None"),
-                                         legacyRCTDigis = cms.InputTag("None")
-)
-
-process.UnpackerResults = cms.EDAnalyzer('l1t::L1UpgradeAnalyzer',
-                                         InputLayer2Collection = cms.InputTag("caloStage1Digis"),
-                                         InputLayer2TauCollection = cms.InputTag("caloStage1Digis:rlxTaus"),
-                                         InputLayer2IsoTauCollection = cms.InputTag("caloStage1Digis:isoTaus"),
-                                         InputLayer2CaloSpareCollection = cms.InputTag("caloStage1Digis:HFRingSums"),
-                                         InputLayer2HFBitCountCollection = cms.InputTag("caloStage1Digis:HFBitCounts"),
-                                         InputLayer1Collection = cms.InputTag("simRctUpgradeFormatDigis"),
-                                         legacyRCTDigis = cms.InputTag("caloStage1Digis")
-)
-
-
-process.L1EmulatorUnpacker = cms.Sequence(process.UnpackerResults + process.EmulatorResults)
 
 AddCaloMuon = False
 runOnMC = False
@@ -270,13 +221,11 @@ finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim, VtxLabel
 process.load('HeavyIonsAnalysis.JetAnalysis.rechitanalyzer_cfi')
 process.rechitanalyzer.doVS = cms.untracked.bool(True)
 process.rechitanalyzer.useJets = cms.untracked.bool(False)
-process.rechitanalyzer.EBTreePtMin = -9999
-process.rechitanalyzer.EETreePtMin = -9999
-process.rechitanalyzer.HBHETreePtMin = -9999
-process.rechitanalyzer.HFTreePtMin = -9999
-process.rechitanalyzer.HFlongMin = -9999
-process.rechitanalyzer.HFshortMin = -9999
 process.rechitanalyzer.HFtowerMin = -9999
+process.rechitanalyzer.doTowers = cms.untracked.bool(True)
+process.rechitanalyzer.doEcal = cms.untracked.bool(False)
+process.rechitanalyzer.doHcal = cms.untracked.bool(False)
+
 
 process.load("HeavyIonsAnalysis.JetAnalysis.hcalNoise_cff")
 
@@ -325,8 +274,8 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
-                            process.L1Sequence +
-                            process.L1EmulatorUnpacker +
+                            # process.L1Sequence +
+                            # process.L1EmulatorUnpacker +
                             process.finderSequence +
                             process.rechitanalyzer +
                             process.hltMuTree + 
@@ -363,9 +312,9 @@ process.clusterCompatibilityFilter.clusterPars = cms.vdouble(0.0,0.006)
                                          # process.NoScraping 
                                          # )
 
-process.phltJetHI = cms.Path( process.hltJetHI )
+# process.phltJetHI = cms.Path( process.hltJetHI )
 # process.primaryVertexFilter.src = cms.InputTag("offlinePrimaryVertices")
-process.pcollisionEventSelection = cms.Path(process.collisionEventSelection)
+process.pcollisionEventSelection = cms.Path(process.collisionEventSelectionAOD)
 process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
 

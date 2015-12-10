@@ -66,7 +66,7 @@ process.load('FWCore.MessageService.MessageLogger_cfi')
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_ExpressHI_v2', '')
 
-
+process.HiForest.GlobalTagLabel = process.GlobalTag.globaltag
 
 ##########################################JEC##########################################
 from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb5020
@@ -124,7 +124,10 @@ process.TFileService = cms.Service("TFileService",
 #####################################################################################
 
 
+from Configuration.StandardSequences.ReconstructionHeavyIons_cff import voronoiBackgroundPF, voronoiBackgroundCalo
 
+process.voronoiBackgroundPF = voronoiBackgroundPF
+process.voronoiBackgroundCalo = voronoiBackgroundCalo
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu3CaloJetSequence_PbPb_data_bTag_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akVs3CaloJetSequence_PbPb_data_bTag_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.jets.akPu3PFJetSequence_PbPb_data_bTag_cff')
@@ -142,12 +145,19 @@ process.PureTracks = cms.EDFilter("TrackSelector",
                        src = cms.InputTag("hiGeneralTracks"),
                        cut = cms.string('quality("highPurity")'))
 
+process.load("RecoVertex.PrimaryVertexProducer.OfflinePrimaryVertices_cfi")
+process.offlinePrimaryVertices.TrackLabel = 'highPurityTracks'
 
+process.highPurityTracks = cms.EDFilter("TrackSelector",
+                                        src = cms.InputTag("hiGeneralTracks"),
+                                        cut = cms.string('quality("highPurity")'))
 
 process.jetSequences = cms.Sequence(
 # process.ak3CaloJetSequence +
                                     # process.ak3PFJetSequence +
                                     process.PureTracks +
+                                    voronoiBackgroundPF+
+                                    voronoiBackgroundCalo+
                                     process.akVs3CaloJetSequence +
                                     process.akPu3CaloJetSequence +
                                     process.akVs3PFJetSequence +

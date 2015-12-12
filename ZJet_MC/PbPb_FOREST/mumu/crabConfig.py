@@ -2,10 +2,10 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'zmumu_forest_v2'
+config.General.requestName = 'zmumu_forest_v3'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
-config.JobType.maxMemoryMB = 3500 #default 2000
+config.JobType.maxMemoryMB = 3000 #default 2000
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['HiForestAOD.root']
 config.section_('Data')
@@ -15,7 +15,7 @@ config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'Pythia8_Z30mumuJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_FOREST_PrivMC_v1'
+config.Data.outputDatasetTag = 'Pythia8_Z30mumuJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_FOREST_PrivMC_v3'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

@@ -26,13 +26,14 @@ process.HiForest.HiForestVersion = cms.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-                                "file:.samples/PbPb_MC_RECODEBUG.root"
+        #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
+        "file:step3_102.root",
+                                )
                             )
-)
 
 # Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10)
+    input = cms.untracked.int32(-1)
 )
 
 
@@ -90,6 +91,8 @@ process.load('GeneratorInterface.HiGenCommon.HeavyIon_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.HiGenAnalyzer_cfi')
 process.load('HeavyIonsAnalysis.EventAnalysis.runanalyzer_cff')
 process.HiGenParticleAna.genParticleSrc = cms.untracked.InputTag("genParticles")
+# Temporary disactivation - until we have DIGI & RECO in CMSSW_7_5_7_patch4
+process.HiGenParticleAna.doHI = False
 process.HiGenParticleAna.ptMin = 0.4
 
 #####################################################################################
@@ -110,21 +113,10 @@ process.pfcandAnalyzer.pfPtMin = 0
 # Track Analyzer
 #########################
 process.load('HeavyIonsAnalysis.JetAnalysis.ExtraTrackReco_cff')
-process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_MC_cff')
-process.load("HeavyIonsAnalysis.TrackAnalysis.METAnalyzer_cff")
+process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_cff')
 
-process.anaTrack.qualityStrings = cms.untracked.vstring(['highPurity','tight','loose'])
-process.pixelTrack.qualityStrings = cms.untracked.vstring('highPurity')
-process.hiTracks.cut = cms.string('quality("highPurity")')
-process.anaTrack.trackSrc = cms.InputTag("hiGeneralTracks")
-process.anaTrack.doPFMatching = True
-process.anaTrack.doSimVertex = True
-process.anaTrack.doSimTrack = False
-
-process.load("SimTracker.TrackAssociation.trackingParticleRecoTrackAsssociation_cff")
-process.tpRecoAssocGeneralTracks = process.trackingParticleRecoTrackAsssociation.clone()
-process.tpRecoAssocGeneralTracks.label_tr = cms.InputTag("hiGeneralTracks")
-process.quickTrackAssociatorByHits.ComponentName = cms.string('quickTrackAssociatorByHits')
+# Use this instead for track corrections
+## process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_Corr_cff')
 
 #####################################################################################
 
@@ -143,20 +135,20 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
 # Main analysis list
 #########################
 
-process.ana_step = cms.Path(process.heavyIon *
-                            #process.mixAnalyzer *
+process.ana_step = cms.Path(
+# Temporary disactivation - until we have DIGI & RECO in CMSSW_7_5_7_patch4
+# process.mixAnalyzer *
                             process.runAnalyzer *
                             process.hltanalysis *
                             process.centralityBin *
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
-                            process.quickTrackAssociatorByHits*
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
                             process.HiForest +
-                            process.anaTrack
+                            process.trackSequencesPbPb
                             )
 
 #####################################################################################

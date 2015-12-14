@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'zee_reco_v2'
+config.General.requestName = 'zee_reco_timeslew_v4'
 config.section_('JobType')
 config.JobType.psetName = 'step3_RAW2DIGI_L1Reco_RECO_PU.py'
 config.JobType.maxMemoryMB = 3500 #default 2000
@@ -15,7 +15,7 @@ config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1
 config.Data.publication = True
-config.Data.outputDatasetTag = 'Pythia8_Z30eeJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_RECODEBUG_PrivMC_v1'
+config.Data.outputDatasetTag = 'Pythia8_Z30eeJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_RECODEBUG_PrivMC_v4'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

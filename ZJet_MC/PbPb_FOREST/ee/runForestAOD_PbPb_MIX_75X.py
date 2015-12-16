@@ -26,10 +26,9 @@ process.HiForest.HiForestVersion = cms.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-        #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
-        "file:step3_102.root",
-                                )
+                                "file:samples/step3_198.root"
                             )
+)
 
 # Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
@@ -56,9 +55,6 @@ from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb
 process = overrideJEC_PbPb5020(process)
 
 process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
-# process.centralityBin.Centrality = cms.InputTag("hiCentrality")
-# process.centralityBin.centralityVariable = cms.string("HFtowers")
-#process.centralityBin.nonDefaultGlauberModel = cms.string("HydjetDrum5")
 
 #####################################################################################
 # Define tree output
@@ -93,7 +89,7 @@ process.load('HeavyIonsAnalysis.EventAnalysis.runanalyzer_cff')
 process.HiGenParticleAna.genParticleSrc = cms.untracked.InputTag("genParticles")
 # Temporary disactivation - until we have DIGI & RECO in CMSSW_7_5_7_patch4
 process.HiGenParticleAna.doHI = False
-process.HiGenParticleAna.ptMin = 0.4
+
 
 #####################################################################################
 
@@ -132,6 +128,64 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
 #####################################################################################
 
 #########################
+# Tupel and related PAT objects
+#########################
+
+process.load("MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff")
+process.muonMatchHLTL2.maxDeltaR = 0.3
+process.muonMatchHLTL3.maxDeltaR = 0.1
+from MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff import *
+process.patTriggerFull.l1GtReadoutRecordInputTag = cms.InputTag("gtDigis","","RECO")                 
+process.patTrigger.collections.remove("hltL3MuonCandidates")
+process.patTrigger.collections.append("hltHIL3MuonCandidates")
+process.muonMatchHLTL3.matchedCuts = cms.string('coll("hltHIL3MuonCandidates")')
+process.patMuonsWithoutTrigger.pvSrc = cms.InputTag("hiSelectedVertex")
+
+process.load("PhysicsTools.PatAlgos.mcMatchLayer0.photonMatch_cfi")
+process.photonMatch.src = cms.InputTag("gedPhotonsTmp")
+process.load("PhysicsTools.PatAlgos.producersLayer1.photonProducer_cfi")
+process.patPhotons.photonSource = cms.InputTag("gedPhotonsTmp")
+process.patPhotons.electronSource = cms.InputTag("gedGsfElectronsTmp")
+process.patPhotons.reducedBarrelRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEB")
+process.patPhotons.reducedEndcapRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEE")
+process.patPhotons.addPhotonID = cms.bool(False)
+process.patPhotonSequence = cms.Sequence(process.photonMatch * process.patPhotons)
+
+process.load("PhysicsTools.PatAlgos.mcMatchLayer0.electronMatch_cfi")
+process.electronMatch.src = cms.InputTag("gedGsfElectronsTmp")
+process.load("PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi")
+process.patElectrons.electronSource = cms.InputTag("gedGsfElectronsTmp")
+process.patElectrons.reducedBarrelRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEB")
+process.patElectrons.reducedEndcapRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEE")
+process.patElectrons.pvSrc = cms.InputTag("hiSelectedVertex")
+process.patElectrons.addElectronID = cms.bool(False)
+process.patElectronSequence = cms.Sequence(process.electronMatch * process.patElectrons)
+
+process.tupel = cms.EDAnalyzer("Tupel",
+  trigger      = cms.InputTag( "patTrigger" ),
+#  triggerEvent = cms.InputTag( "patTriggerEvent" ),
+#  triggerSummaryLabel = cms.InputTag("hltTriggerSummaryAOD","","HLT"),
+  photonSrc    = cms.untracked.InputTag("patPhotons"),
+  vtxSrc       = cms.untracked.InputTag("hiSelectedVertex"),
+  electronSrc  = cms.untracked.InputTag("patElectrons"),
+  muonSrc      = cms.untracked.InputTag("patMuonsWithTrigger"),
+#  tauSrc      = cms.untracked.InputTag("slimmedPatTaus"),
+  jetSrc       = cms.untracked.InputTag("akPu4PFpatJetsWithBtagging"),
+  metSrc       = cms.untracked.InputTag("patMETsPF"),
+  genSrc       = cms.untracked.InputTag("genParticles"),
+  gjetSrc      = cms.untracked.InputTag('ak4HiGenJets'),
+  muonMatch    = cms.string( 'muonTriggerMatchHLTMuons' ),
+  muonMatch2   = cms.string( 'muonTriggerMatchHLTMuons2' ),
+  elecMatch    = cms.string( 'elecTriggerMatchHLTElecs' ),
+  mSrcRho      = cms.untracked.InputTag('fixedGridRhoFastjetAll'),
+  CalojetLabel = cms.untracked.InputTag('ak4CalopatJets'),
+  metSource    = cms.VInputTag("slimmedMETs","slimmedMETs","slimmedMETs","slimmedMETs"),
+  lheSource    = cms.untracked.InputTag('source')
+)
+
+####################################################################################
+
+#########################
 # Main analysis list
 #########################
 
@@ -143,7 +197,11 @@ process.ana_step = cms.Path(
                             process.centralityBin *
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
-                            process.jetSequences +
+                            process.patMuonsWithTriggerSequence *
+                            process.jetSequences *
+                            process.patPhotonSequence *
+                            process.patElectronSequence *
+                            process.tupel +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +

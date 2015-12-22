@@ -2,21 +2,19 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'zee_HIPhoton40AndZforest_v7'
+config.General.requestName = 'zee_ppforest1_v6'
 config.section_('JobType')
-config.JobType.psetName = 'runForestAOD_PbPb_DATA_75X.py'
+config.JobType.psetName = 'runForestAOD_pp_DATA_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
 config.JobType.pluginName = 'Analysis'
-# config.JobType.outputFiles = ['HiForestAOD.root']
 config.section_('Data')
-config.Data.inputDataset = '/HIPhoton40AndZ/HIRun2015-ZEE-PromptReco-v1/AOD'
-config.Data.lumiMask = 'json_PbPb_262548-263322.txt'
-# config.Data.inputDBS = 'global'
+config.Data.inputDataset = '/HighPtPhoton30AndZ/azsigmon-Run2015E-PromptReco-AOD-DielectronSkim-262274-262328-v1-0d8b27ea5ddb998af72cec10f8b38257/USER'
+config.Data.inputDBS = 'phys03'
 config.Data.splitting = "FileBased"
-config.Data.unitsPerJob = 1
+config.Data.unitsPerJob = 20
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'HIPhoton40AndZ_HIRun2015-ZEE-PromptReco_FOREST_v7'
+config.Data.outputDatasetTag = 'PromptReco-AOD-DielectronSkim-262274-262328_ppFOREST_v6'
 config.section_('User')
 config.section_('Site')
 # config.Site.whitelist = ['T2_US_MIT']

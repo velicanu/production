@@ -26,13 +26,14 @@ process.HiForest.HiForestVersion = cms.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-                                "file:samples/step3_198.root"
+        #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
+        "file:step3_103.root",
+                                )
                             )
-)
 
 # Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(-1)
+    input = cms.untracked.int32(10)
 )
 
 
@@ -55,6 +56,9 @@ from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb
 process = overrideJEC_PbPb5020(process)
 
 process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
+# process.centralityBin.Centrality = cms.InputTag("hiCentrality")
+# process.centralityBin.centralityVariable = cms.string("HFtowers")
+#process.centralityBin.nonDefaultGlauberModel = cms.string("HydjetDrum5")
 
 #####################################################################################
 # Define tree output
@@ -97,7 +101,8 @@ process.HiGenParticleAna.doHI = False
 # Event Analysis
 ############################
 process.load('HeavyIonsAnalysis.EventAnalysis.hievtanalyzer_mc_cfi')
-process.hiEvtAnalyzer.doMC = cms.bool(False) #the gen info dataformat has changed in 73X, we need to update hiEvtAnalyzer code
+process.hiEvtAnalyzer.doMC = cms.bool(True) #general MC info
+process.hiEvtAnalyzer.doHiMC = cms.bool(True) #HI specific MC info
 process.load('HeavyIonsAnalysis.EventAnalysis.hltanalysis_cff')
 process.load("HeavyIonsAnalysis.JetAnalysis.pfcandAnalyzer_cfi")
 process.pfcandAnalyzer.skipCharged = False
@@ -125,65 +130,15 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
                                                        recoPhotonHiIsolationMap = cms.InputTag('photonIsolationHIProducerGED')
 )
 
-#####################################################################################
-
-#########################
-# Tupel and related PAT objects
-#########################
-
-process.load("MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff")
-process.muonMatchHLTL2.maxDeltaR = 0.3
-process.muonMatchHLTL3.maxDeltaR = 0.1
-from MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff import *
-process.patTriggerFull.l1GtReadoutRecordInputTag = cms.InputTag("gtDigis","","RECO")                 
-process.patTrigger.collections.remove("hltL3MuonCandidates")
-process.patTrigger.collections.append("hltHIL3MuonCandidates")
-process.muonMatchHLTL3.matchedCuts = cms.string('coll("hltHIL3MuonCandidates")')
-process.patMuonsWithoutTrigger.pvSrc = cms.InputTag("hiSelectedVertex")
-
-process.load("PhysicsTools.PatAlgos.mcMatchLayer0.photonMatch_cfi")
-process.photonMatch.src = cms.InputTag("gedPhotonsTmp")
-process.load("PhysicsTools.PatAlgos.producersLayer1.photonProducer_cfi")
-process.patPhotons.photonSource = cms.InputTag("gedPhotonsTmp")
-process.patPhotons.electronSource = cms.InputTag("gedGsfElectronsTmp")
-process.patPhotons.reducedBarrelRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEB")
-process.patPhotons.reducedEndcapRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEE")
-process.patPhotons.addPhotonID = cms.bool(False)
-process.patPhotonSequence = cms.Sequence(process.photonMatch * process.patPhotons)
-
-process.load("PhysicsTools.PatAlgos.mcMatchLayer0.electronMatch_cfi")
-process.electronMatch.src = cms.InputTag("gedGsfElectronsTmp")
-process.load("PhysicsTools.PatAlgos.producersLayer1.electronProducer_cfi")
-process.patElectrons.electronSource = cms.InputTag("gedGsfElectronsTmp")
-process.patElectrons.reducedBarrelRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEB")
-process.patElectrons.reducedEndcapRecHitCollection = cms.InputTag("ecalRecHit","EcalRecHitsEE")
-process.patElectrons.pvSrc = cms.InputTag("hiSelectedVertex")
-process.patElectrons.addElectronID = cms.bool(False)
-process.patElectronSequence = cms.Sequence(process.electronMatch * process.patElectrons)
-
-process.tupel = cms.EDAnalyzer("Tupel",
-  trigger      = cms.InputTag( "patTrigger" ),
-#  triggerEvent = cms.InputTag( "patTriggerEvent" ),
-#  triggerSummaryLabel = cms.InputTag("hltTriggerSummaryAOD","","HLT"),
-  photonSrc    = cms.untracked.InputTag("patPhotons"),
-  vtxSrc       = cms.untracked.InputTag("hiSelectedVertex"),
-  electronSrc  = cms.untracked.InputTag("patElectrons"),
-  muonSrc      = cms.untracked.InputTag("patMuonsWithTrigger"),
-#  tauSrc      = cms.untracked.InputTag("slimmedPatTaus"),
-  jetSrc       = cms.untracked.InputTag("akPu4PFpatJetsWithBtagging"),
-  metSrc       = cms.untracked.InputTag("patMETsPF"),
-  genSrc       = cms.untracked.InputTag("genParticles"),
-  gjetSrc      = cms.untracked.InputTag('ak4HiGenJets'),
-  muonMatch    = cms.string( 'muonTriggerMatchHLTMuons' ),
-  muonMatch2   = cms.string( 'muonTriggerMatchHLTMuons2' ),
-  elecMatch    = cms.string( 'elecTriggerMatchHLTElecs' ),
-  mSrcRho      = cms.untracked.InputTag('fixedGridRhoFastjetAll'),
-  CalojetLabel = cms.untracked.InputTag('ak4CalopatJets'),
-  metSource    = cms.VInputTag("slimmedMETs","slimmedMETs","slimmedMETs","slimmedMETs"),
-  lheSource    = cms.untracked.InputTag('source')
-)
-
 ####################################################################################
+
+#####################
+# tupel and necessary PAT sequences
+#####################
+
+process.load("HeavyIonsAnalysis.VectorBosonAnalysis.tupelSequence_PbPb_mc_cff")
+
+#####################################################################################
 
 #########################
 # Main analysis list
@@ -197,16 +152,13 @@ process.ana_step = cms.Path(
                             process.centralityBin *
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
-                            process.patMuonsWithTriggerSequence *
-                            process.jetSequences *
-                            process.patPhotonSequence *
-                            process.patElectronSequence *
-                            process.tupel +
+                            process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
                             process.HiForest +
-                            process.trackSequencesPbPb
+                            process.trackSequencesPbPb #+
+                            #process.tupelPatSequence
                             )
 
 #####################################################################################

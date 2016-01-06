@@ -42,4 +42,4 @@ crab submit -c runForestAOD_PbPb_MIX_75X_15/crabConfig.py # run this alone to ma
 for i in `seq 1 10` ; do crab submit -c runForestAOD_PbPb_MIX_75X_${pthats[$((i))]}/crabConfig.py; done
 ```
 
-*7. once the jobs finish running, merge them with hadd and document the sammples on the HiForest twiki: https://twiki.cern.ch/twiki/bin/view/CMS/HiForest2015 
+*7. once the jobs finish running, merge them with hadd and document the samples on the HiForest twiki: https://twiki.cern.ch/twiki/bin/view/CMS/HiForest2015 

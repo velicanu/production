@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'zmumu_ppforest2_v6'
+config.General.requestName = 'zmumu_ppforest2jec_v8'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_pp_DATA_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
@@ -14,7 +14,7 @@ config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 20
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'PromptReco-AOD-DimuonSkim-Mass40-262163-262273_ppFOREST_v6'
+config.Data.outputDatasetTag = 'PromptReco-AOD-DimuonSkim-Mass40-262163-262273_ppFORESTjec_v8'
 config.section_('User')
 config.section_('Site')
 # config.Site.whitelist = ['T2_US_MIT']

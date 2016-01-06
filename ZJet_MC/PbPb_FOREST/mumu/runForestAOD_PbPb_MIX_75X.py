@@ -1,4 +1,4 @@
-### HiForest Configuration
+## HiForest Configuration
 # Collisions: PbPb
 # Type: MonteCarlo
 # Input: AOD
@@ -157,8 +157,8 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
                             process.HiForest +
-                            process.trackSequencesPbPb #+
-                            #process.tupelPatSequence
+                            process.trackSequencesPbPb +
+                            process.tupelPatSequence
                             )
 
 #####################################################################################
@@ -169,8 +169,12 @@ process.ana_step = cms.Path(
 
 process.load('HeavyIonsAnalysis.JetAnalysis.EventSelection_cff')
 process.pcollisionEventSelection = cms.Path(process.collisionEventSelectionAOD)
-process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
+process.HBHENoiseFilterResult = cms.Path(process.fHBHENoiseFilterResult)
+process.HBHENoiseFilterResultRun1 = cms.Path(process.fHBHENoiseFilterResultRun1)
+process.HBHENoiseFilterResultRun2Loose = cms.Path(process.fHBHENoiseFilterResultRun2Loose)
+process.HBHENoiseFilterResultRun2Tight = cms.Path(process.fHBHENoiseFilterResultRun2Tight)
+process.HBHEIsoNoiseFilterResult = cms.Path(process.fHBHEIsoNoiseFilterResult)
 process.pprimaryVertexFilter = cms.Path(process.primaryVertexFilter )
 
 process.load('HeavyIonsAnalysis.Configuration.hfCoincFilter_cff')
@@ -185,3 +189,24 @@ process.pclusterCompatibilityFilter = cms.Path(process.clusterCompatibilityFilte
 process.pAna = cms.EndPath(process.skimanalysis)
 
 # Customization
+##########################################UE##########################################
+from CondCore.DBCommon.CondDBSetup_cfi import *
+process.uetable = cms.ESSource("PoolDBESSource",
+      DBParameters = cms.PSet(
+        messageLevel = cms.untracked.int32(0)
+        ),
+      timetype = cms.string('runnumber'),
+      toGet = cms.VPSet(
+          cms.PSet(record = cms.string("JetCorrectionsRecord"),
+                   tag = cms.string("UETableCompatibilityFormat_PF_HYDJET_5020GeV_754_38T_v01_mc"),
+                   label = cms.untracked.string("UETable_PF")
+          ),
+          cms.PSet(record = cms.string("JetCorrectionsRecord"),
+                   tag = cms.string("UETableCompatibilityFormat_Calo_HYDJET_5020GeV_754_38T_v01_mc"),
+                   label = cms.untracked.string("UETable_Calo")
+          )
+      ),
+      connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+)
+process.es_prefer_uetable = cms.ESPrefer('PoolDBESSource','uetable')
+##########################################UE##########################################

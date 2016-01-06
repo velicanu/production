@@ -22,7 +22,7 @@ process.load('HeavyIonsAnalysis.JetAnalysis.ExtraTrackReco_cff')
 process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_Corr_cff')
 ```
 
-*4. Edit the crabConfig.py for the current production, these lines specifically, make sure to KEEP _PTMINFLAG_ which is automatically set later :
+*4. Edit the crabConfig.py for the current production, these lines specifically, make sure to KEEP \_PTMINFLAG_ which is automatically set later :
 ```python
 config.General.requestName = 'Pythia8_Dijet_PTMINFLAG__pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC_v0'
 config.Data.outputDatasetTag = 'Pythia8_Dijet_PTMINFLAG__pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC'

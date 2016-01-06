@@ -11,7 +11,7 @@ cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_MC_75X.py 
 cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_PbPb_MIX_75X.py .
 ```
 
-## 3. edit to the runForest config:
+## 3. edit the runForest config:
 If we want simtracks 
 ```python
 #########################

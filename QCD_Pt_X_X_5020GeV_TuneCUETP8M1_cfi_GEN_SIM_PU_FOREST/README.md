@@ -2,15 +2,15 @@
 
 How to make the dijet forest for all pthats:
 
-\1. Setup cmssw for forest, follow these instructions: https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiForestSetup#Setup_for_7_5_X 
+## 1. Setup cmssw for forest, follow these instructions: https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiForestSetup#Setup_for_7_5_X 
 
-\2. In this production dir, copy the latest runForest configs:
+## 2. In this production dir, copy the latest runForest configs:
 ```bash
 cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_pp_MC_75X.py .
 cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_PbPb_MIX_75X.py .
 ```
 
-\3. If we want simtracks, the make the following edit to the runForest config:
+## 3. If we want simtracks, the make the following edit to the runForest config:
 ```python
 #########################
 # Track Analyzer                                                                       

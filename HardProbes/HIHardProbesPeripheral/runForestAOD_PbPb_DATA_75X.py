@@ -182,6 +182,49 @@ process.load('HeavyIonsAnalysis.JetAnalysis.TrkAnalyzers_cff')
 
 
 ####################################################################################
+#####################################################################################
+######################### D finder ##################################################
+#####################################################################################
+runOnMC = False
+RunOnAOD = True
+AddCaloMuon = False
+HIFormat = False
+UseGenPlusSim = False
+VtxLabel = "hiSelectedVertex"
+from Bfinder.finderMaker.finderMaker_75X_cff import finderMaker_75X
+finderMaker_75X(process, AddCaloMuon, runOnMC, HIFormat, UseGenPlusSim)
+
+#default for D0 and Jet triggers, tk pt cut 8.0 GeV
+process.Dfinder = cms.EDAnalyzer("Dfinder",
+    BSLabel = cms.InputTag("offlineBeamSpot"),
+    Dchannel = cms.vint32(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    GenLabel = cms.InputTag("genParticles"),
+    HLTLabel = cms.InputTag("TriggerResults","","HLT"),
+    MVAMapLabel = cms.string('hiGeneralTracks'),
+    MaxDocaCut = cms.vdouble(999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0),
+    PUInfoLabel = cms.InputTag("addPileupInfo"),
+    PVLabel = cms.InputTag("hiSelectedVertex"),
+    RunOnMC = cms.bool(False),
+    TrackLabel = cms.InputTag("patTrackCands"),
+    dCutSeparating_PtVal = cms.vdouble(5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0),
+    dEtaCut = cms.vdouble(1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5),
+    dPtCut = cms.vdouble(0.5, 0.5, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 9.0, 9.0),
+    detailMode = cms.bool(False),
+    doDntupleSkim = cms.bool(False),
+    doTkPreCut = cms.bool(True),
+    dropUnusedTracks = cms.bool(True),
+    makeDntuple = cms.bool(False),
+    VtxChiProbCut = cms.vdouble(0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0), #this cut not good for decay with resonance now
+    alphaCut = cms.vdouble(0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 999.0, 999.0, 999.0, 999.0),
+    svpvDistanceCut_highptD = cms.vdouble(2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0),
+    svpvDistanceCut_lowptD = cms.vdouble(4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 0.0, 0.0, 0.0, 0.0),
+    tkEtaCut = cms.double(2.0),
+    tkPtCut = cms.double(6.0),
+    tktkRes_alphaCut = cms.vdouble(999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 0.2, 0.2, 0.2, 0.2),
+    tktkRes_svpvDistanceCut_highptD = cms.vdouble(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 2.0),
+    tktkRes_svpvDistanceCut_lowptD = cms.vdouble(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.0, 4.0, 4.0, 4.0)
+)
+#################################################################################################
 
 #####################
 # Photons
@@ -207,12 +250,13 @@ process.load("HeavyIonsAnalysis.VectorBosonAnalysis.tupelSequence_PbPb_cff")
 #########################
 
 process.ana_step = cms.Path(process.hltanalysis *
-			    process.hltobject *
+                            process.hltobject *
                             process.centralityBin *
                             process.hiEvtAnalyzer*
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
+                            process.DfinderSequence +
                             process.pfcandAnalyzer +
                             process.HiForest +
                             process.trackSequencesPbPb +
@@ -269,3 +313,18 @@ process.uetable = cms.ESSource("PoolDBESSource",
 )
 process.es_prefer_uetable = cms.ESPrefer('PoolDBESSource','uetable')
 ##########################################UE##########################################
+
+
+
+
+
+import HLTrigger.HLTfilters.hltHighLevel_cfi
+process.hltfilter = HLTrigger.HLTfilters.hltHighLevel_cfi.hltHighLevel.clone()
+process.hltfilter.HLTPaths = ["HLT_HIPuAK4CaloJet*_Eta5p1_Cent*100_v*","HLT_HIFullTrack*","HLT_HIDmesonHITrackingGlobal_Dpt*"]
+process.superFilterPath = cms.Path(process.hltfilter)
+process.skimanalysis.superFilters = cms.vstring("superFilterPath")
+##filter all path with the production filter sequence
+for path in process.paths:
+   getattr(process,path)._seq = process.hltfilter * getattr(process,path)._seq
+   
+   

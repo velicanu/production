@@ -1,4 +1,4 @@
-## HiForest Configuration
+### HiForest Configuration
 # Collisions: PbPb
 # Type: MonteCarlo
 # Input: AOD
@@ -27,7 +27,7 @@ process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
         #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
-        "file:step3_103.root",
+        "file:step3_hi_mc.root",
                                 )
                             )
 
@@ -48,8 +48,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condD
 process.load('FWCore.MessageService.MessageLogger_cfi')
 
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-#process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc_HIon', '')
-process.GlobalTag = GlobalTag(process.GlobalTag, '75X_mcRun2_HeavyIon_v11', '') #for now track GT manually, since centrality tables updated ex post facto
+process.GlobalTag = GlobalTag(process.GlobalTag, '75X_mcRun2_HeavyIon_v12', '') #for now track GT manually, since centrality tables updated ex post facto
 process.HiForest.GlobalTagLabel = process.GlobalTag.globaltag
 
 from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import overrideJEC_PbPb5020
@@ -157,8 +156,8 @@ process.ana_step = cms.Path(
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +
                             process.HiForest +
-                            process.trackSequencesPbPb +
-                            process.tupelPatSequence
+                            process.trackSequencesPbPb #+
+                            #process.tupelPatSequence
                             )
 
 #####################################################################################
@@ -198,11 +197,11 @@ process.uetable = cms.ESSource("PoolDBESSource",
       timetype = cms.string('runnumber'),
       toGet = cms.VPSet(
           cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_PF_HYDJET_5020GeV_754_38T_v01_mc"),
+                   tag = cms.string("UETableCompatibilityFormat_PF_HYDJET_5020GeV_754_38T_v02_mc"),
                    label = cms.untracked.string("UETable_PF")
           ),
           cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_Calo_HYDJET_5020GeV_754_38T_v01_mc"),
+                   tag = cms.string("UETableCompatibilityFormat_Calo_HYDJET_5020GeV_754_38T_v02_mc"),
                    label = cms.untracked.string("UETable_Calo")
           )
       ),

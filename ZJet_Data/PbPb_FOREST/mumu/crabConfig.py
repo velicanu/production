@@ -2,20 +2,21 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'zmumu_forest_v4'
+config.General.requestName = 'HIRun2015-ZMM-PromptReco-v1-FOREST-v21'
 config.section_('JobType')
-config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
-config.JobType.maxMemoryMB = 3000 #default 2000
+config.JobType.psetName = 'runForestAOD_PbPb_DATA_75X.py'
+# config.JobType.maxMemoryMB = 3000 #default 2000
 config.JobType.pluginName = 'Analysis'
-config.JobType.outputFiles = ['HiForestAOD.root']
+# config.JobType.outputFiles = ['HiForestAOD.root']
 config.section_('Data')
-config.Data.inputDataset = '/Pythia8_Z30mumuJet_pthat30Norm_TuneCUETP8M1_5020GeV_Hydjet_MinBias_5020GeV_PrivMC/velicanu-Pythia8_Z30mumuJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_RECODEBUG_PrivMC_v4-2f2aa4b18dfb942da7efda1b324f56e7/USER'
-config.Data.inputDBS = 'phys03'
+config.Data.inputDataset = '/HIEWQExo/HIRun2015-ZMM-PromptReco-v1/RAW-RECO'
+# config.Data.inputDBS = 'global'
+config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/HI/Cert_262548-263757_PromptReco_HICollisions15_JSON.txt'
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'Pythia8_Z30mumuJet_pthat30Norm_TuneCUETP8M1_5020GeV_cff_FOREST_PrivMC_v4'
+config.Data.outputDatasetTag = 'HIRun2015-ZMM-PromptReco-v1-FOREST-v21'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

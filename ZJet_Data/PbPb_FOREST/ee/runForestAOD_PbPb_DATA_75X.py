@@ -228,8 +228,12 @@ process.ana_step = cms.Path(process.hltanalysis *
 
 process.load('HeavyIonsAnalysis.JetAnalysis.EventSelection_cff')
 process.pcollisionEventSelection = cms.Path(process.collisionEventSelectionAOD)
-process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.pHBHENoiseFilterResultProducer = cms.Path( process.HBHENoiseFilterResultProducer )
+process.HBHENoiseFilterResult = cms.Path(process.fHBHENoiseFilterResult)
+process.HBHENoiseFilterResultRun1 = cms.Path(process.fHBHENoiseFilterResultRun1)
+process.HBHENoiseFilterResultRun2Loose = cms.Path(process.fHBHENoiseFilterResultRun2Loose)
+process.HBHENoiseFilterResultRun2Tight = cms.Path(process.fHBHENoiseFilterResultRun2Tight)
+process.HBHEIsoNoiseFilterResult = cms.Path(process.fHBHEIsoNoiseFilterResult)
 process.pprimaryVertexFilter = cms.Path(process.primaryVertexFilter )
 
 process.load('HeavyIonsAnalysis.Configuration.hfCoincFilter_cff')
@@ -253,11 +257,11 @@ process.uetable = cms.ESSource("PoolDBESSource",
       timetype = cms.string('runnumber'),
       toGet = cms.VPSet(
           cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_PF_v00_offline"),
+                   tag = cms.string("UETableCompatibilityFormat_PF_v02_offline"),
                    label = cms.untracked.string("UETable_PF")
           ),
           cms.PSet(record = cms.string("JetCorrectionsRecord"),
-                   tag = cms.string("UETableCompatibilityFormat_Calo_v00_offline"),
+                   tag = cms.string("UETableCompatibilityFormat_Calo_v02_offline"),
                    label = cms.untracked.string("UETable_Calo")
           )
       ), 

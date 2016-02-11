@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'Pythia8_Dijet30_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC_vstest_v0'
+config.General.requestName = 'Pythia8_Dijet30_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC_vstest_v1'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
 config.JobType.pluginName = 'Analysis'
@@ -12,7 +12,7 @@ config.Data.inputDBS = 'phys03'
 config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 10
 config.Data.totalUnits = -1
-config.Data.outputDatasetTag = 'Pythia8_Dijet30_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC_vstest_v0'
+config.Data.outputDatasetTag = 'Pythia8_Dijet30_pp_TuneCUETP8M1_Hydjet_MinBias_5020GeV_FOREST_758_PrivMC_vstest_v1'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

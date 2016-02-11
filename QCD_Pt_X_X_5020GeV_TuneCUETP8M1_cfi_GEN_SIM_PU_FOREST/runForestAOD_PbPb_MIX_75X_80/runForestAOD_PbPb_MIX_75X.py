@@ -27,13 +27,13 @@ process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
         #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
-        "file:step3_1.root",
+        "file:step3_hi_mc.root",
                                 )
                             )
 
 # Number of events we want to process, -1 = all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(-1)
+    input = cms.untracked.int32(10)
 )
 
 
@@ -129,24 +129,6 @@ process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.Input
                                                        recoPhotonHiIsolationMap = cms.InputTag('photonIsolationHIProducerGED')
 )
 
-####################################################################################
-#####################
-# Electron ID
-#####################
-from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
-process.load("RecoEgamma.ElectronIdentification.egmGsfElectronIDs_cfi")
-
-from PhysicsTools.SelectorUtils.centralIDRegistry import central_id_registry
-process.egmGsfElectronIDSequence = cms.Sequence(process.egmGsfElectronIDs)
-
-process.egmGsfElectronIDs.physicsObjectSrc = cms.InputTag('gedGsfElectronsTmp')
-
-process.load('RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Spring15_25ns_V1_cff')
-setupVIDSelection(process.egmGsfElectronIDs,process.cutBasedElectronID_Spring15_25ns_V1_standalone_veto)
-setupVIDSelection(process.egmGsfElectronIDs,process.cutBasedElectronID_Spring15_25ns_V1_standalone_loose)
-setupVIDSelection(process.egmGsfElectronIDs,process.cutBasedElectronID_Spring15_25ns_V1_standalone_medium)
-setupVIDSelection(process.egmGsfElectronIDs,process.cutBasedElectronID_Spring15_25ns_V1_standalone_tight)
-
 #####################################################################################
 
 
@@ -171,7 +153,6 @@ process.ana_step = cms.Path(
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
                             process.jetSequences +
-                            process.egmGsfElectronIDSequence + #Should be added in the path for VID module 
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +

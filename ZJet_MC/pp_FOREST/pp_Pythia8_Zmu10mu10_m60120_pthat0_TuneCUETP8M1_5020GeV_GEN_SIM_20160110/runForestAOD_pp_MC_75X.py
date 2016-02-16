@@ -26,7 +26,7 @@ process.HiForest.HiForestVersion = cms.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-                                "file:step3.root"
+                                "root://eoscms.cern.ch//eos/cms/store/cmst3/group/hintt/CMSSW_7_5_8_patch2/TTbar/RECO/Events_1.root"
                             )
 )
 
@@ -123,10 +123,29 @@ process.ggHiNtuplizer.recoPhotonHiIsolationMap = cms.InputTag('photonIsolationHI
 process.ggHiNtuplizer.VtxLabel           = cms.InputTag("offlinePrimaryVertices")
 process.ggHiNtuplizer.particleFlowCollection = cms.InputTag("particleFlow")
 process.ggHiNtuplizer.doVsIso            = cms.bool(False)
+process.ggHiNtuplizer.doElectronVID      = cms.bool(True)
 process.ggHiNtuplizerGED = process.ggHiNtuplizer.clone(recoPhotonSrc = cms.InputTag('gedPhotons'),
                                                        recoPhotonHiIsolationMap = cms.InputTag('photonIsolationHIProducerppGED'))
 
 ####################################################################################
+#####################
+# Electron ID
+#####################
+
+from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
+# turn on VID producer, indicate data format to be processed
+# DataFormat.AOD or DataFormat.MiniAOD
+dataFormat = DataFormat.AOD
+switchOnVIDElectronIdProducer(process, dataFormat)
+
+# define which IDs we want to produce. Check here https://twiki.cern.ch/twiki/bin/viewauth/CMS/CutBasedElectronIdentificationRun2#Recipe_for_regular_users_for_7_4
+my_id_modules = ['RecoEgamma.ElectronIdentification.Identification.cutBasedElectronID_Spring15_25ns_V1_cff']
+
+#add them to the VID producer
+for idmod in my_id_modules:
+    setupAllVIDIdsInModule(process,idmod,setupVIDElectronSelection)
+####################################################################################
+
 
 #####################
 # tupel and necessary PAT sequences
@@ -143,6 +162,7 @@ process.ana_step = cms.Path(process.hltanalysis *
                             process.hiEvtAnalyzer *
                             process.HiGenParticleAna*
                             process.jetSequences +
+                            process.egmGsfElectronIDSequence + #Should be added in the path for VID module
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
                             process.pfcandAnalyzer +

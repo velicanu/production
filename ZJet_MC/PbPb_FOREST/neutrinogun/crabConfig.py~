@@ -2,20 +2,20 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'DYToMuMu_M_40_TuneCUETP8M1_5TeV_pythia8_GEN_SIM_20151209_v24'
+config.General.requestName = 'Neutrino_Hydjet_20160212_FOREST-v24'
 config.section_('JobType')
-config.JobType.psetName = 'runForestAOD_pp_MC_75X.py'
+config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
 config.JobType.pluginName = 'Analysis'
-# config.JobType.outputFiles = ['HiForestAOD.root']
+#config.JobType.outputFiles = ['HiForestAOD.root']
 config.section_('Data')
-config.Data.inputDataset = '/DYToMuMu_M_40_TuneCUETP8M1_5TeV_pythia8_GEN_SIM_20151209/twang-DYToMuMu_M_40_TuneCUETP8M1_5TeV_pythia8_step3_20160114-9ef792173553b51399f38cbb33b2e565/USER'
+config.Data.inputDataset = '/Neutrino_Hydjet/gsfs-Neutrino_Hydjet_RECO_20160212-00f741c0e90edc8e6e40dc7e8f945b31/USER'
 config.Data.inputDBS = 'phys03'
 config.Data.splitting = "FileBased"
-config.Data.unitsPerJob = 2
+config.Data.unitsPerJob = 4
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'DYToMuMu_M_40_TuneCUETP8M1_5TeV_pythia8_GEN_SIM_20151209_v24'
+config.Data.outputDatasetTag = 'Neutrino_Hydjet_20160212_FOREST-v24'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

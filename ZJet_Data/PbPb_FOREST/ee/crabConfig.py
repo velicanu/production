@@ -19,6 +19,6 @@ config.Data.publication = False
 config.Data.outputDatasetTag = 'azsigmon-HIRun2015E-PromptReco-AOD-DielectronSkim-ElePt8-v3-FOREST-v24'
 config.section_('User')
 config.section_('Site')
-config.Site.whitelist = ['T2_US_MIT']
+# config.Site.whitelist = ['T2_US_MIT']
 config.Site.blacklist = ['T2_US_Nebraska']
 config.Site.storageSite = 'T2_US_MIT'

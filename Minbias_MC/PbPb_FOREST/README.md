@@ -78,8 +78,8 @@ after several minutes you can check the status
 ```
 crab status -d crab_nameOfFolder
 ```
-You should see something like Queued or Running. If you see SubmitFailed then you need to fix the crabConfig and try again. You can see the status of your jobs on a page like this, with your name in the place of mine:
-dashb-cms-job.cern.ch/dashboard/templates/task-analysis/#user=Dragos+Velicanu&refresh=0&table=Mains&p=1&records=25&activemenu=2&pattern=&task=&from=&till=&timerange=lastWeek
+You should see something like Queued or Running. If you see SubmitFailed then you need to fix the crabConfig and try again. You can see the status of your jobs on a page [like this](dashb-cms-job.cern.ch/dashboard/templates/task-analysis/#user=Dragos+Velicanu&refresh=0&table=Mains&p=1&records=25&activemenu=2&pattern=&task=&from=&till=&timerange=lastWeek), with your name in the place of mine
+
 
 7) Once the forest has completed running you can choose to merge it if the output is not too big, a merging setup I use is here:
 https://github.com/velicanu/mergeforests

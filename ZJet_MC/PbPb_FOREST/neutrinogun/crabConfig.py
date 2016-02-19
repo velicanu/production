@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'Neutrino_Hydjet_20160212_FOREST-v25'
+config.General.requestName = 'Neutrino_Hydjet_20160212_FOREST--v28'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
@@ -15,7 +15,7 @@ config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 4
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'Neutrino_Hydjet_20160212_FOREST-v25'
+config.Data.outputDatasetTag = 'Neutrino_Hydjet_20160212_FOREST--v28'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

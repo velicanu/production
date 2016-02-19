@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'Hydjet_Quenched_MinBias_5020GeV_758p2_FOREST_v20'
+config.General.requestName = 'Hydjet_Quenched_MinBias_5020GeV_758p2_FOREST-v28'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_PbPb_MIX_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
@@ -15,7 +15,7 @@ config.Data.splitting = "EventAwareLumiBased"
 config.Data.unitsPerJob = 1000
 config.Data.totalUnits = 100000
 config.Data.publication = False
-config.Data.outputDatasetTag = 'Hydjet_Quenched_MinBias_5020GeV_758p2_FOREST_v20'
+config.Data.outputDatasetTag = 'Hydjet_Quenched_MinBias_5020GeV_758p2_FOREST-v28'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

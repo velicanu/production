@@ -1,7 +1,6 @@
 # Instructions for running forest in CMSSW_7_5_8
 
-1.
-One time setup cmmsw directory and check out the foresting branch
+1. One time setup cmmsw directory and check out the foresting branch
 ```bash
 cmsrel CMSSW_7_5_8
 cd CMSSW_7_5_8/src
@@ -11,8 +10,7 @@ git remote add cmshi git@github.com:CmsHI/cmssw.git
 scram build -j8
 ```
 
-2.
-From now on you just have to do the following before making forest from this directory.
+2. From now on you just have to do the following before making forest from this directory.
 ```bash
 cd CMSSW_7_5_8/src
 cmsenv
@@ -24,16 +22,14 @@ git pull cmshi forest_CMSSW_7_5_8
 scram build -j8
 ```
 
-3.
-Set up crab
+3. Set up crab
 ```bash
 voms-proxy-init --valid 168:00 -voms cms 
 voms-proxy-info --all
 source /cvmfs/cms.cern.ch/crab3/crab.sh
 ```
 
-4. 
-Prepare the crabConfig.py, I will use the one in this directory as an example
+4. Prepare the crabConfig.py, I will use the one in this directory as an example
 
 ```python
 # The following sets the name of the task in the crab monitoring page
@@ -64,8 +60,7 @@ config.Site.blacklist = ['T2_US_Nebraska']
 config.Site.storageSite = 'T2_US_MIT'
 ```
 
-5. 
-Now that the crabConfig is ready grab the latest runForest config if you did an update.
+5. Now that the crabConfig is ready grab the latest runForest config if you did an update.
 ```bash
 cp $CMSSW_BASE/src/HeavyIonsAnalysis/JetAnalysis/test/runForestAOD_PbPb_MIX_75X.py .
 ```
@@ -75,8 +70,7 @@ cmsRun runForestAOD_PbPb_MIX_75X.py
 ```
 If it runs without problem and the output looks reasonable then you are ready to submit.
 
-6.
-Now submit the crab job.
+6. Now submit the crab job.
 ```bash
 crab submit -c crabConfig.py
 ```
@@ -87,11 +81,8 @@ crab status -d crab_nameOfFolder
 You should see something like Queued or Running. If you see SubmitFailed then you need to fix the crabConfig and try again. You can see the status of your jobs on a page like this, with your name in the place of mine:
 dashb-cms-job.cern.ch/dashboard/templates/task-analysis/#user=Dragos+Velicanu&refresh=0&table=Mains&p=1&records=25&activemenu=2&pattern=&task=&from=&till=&timerange=lastWeek
 
-7.
-Once the forest has completed running you can choose to merge it if the output is not too big, a merging setup I use is here:
+7. Once the forest has completed running you can choose to merge it if the output is not too big, a merging setup I use is here:
 https://github.com/velicanu/mergeforests
 
 
-
-6.
 

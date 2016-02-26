@@ -2,6 +2,7 @@
 *.root
 *crab_*_*
 *crab.history
+*~
 
 # Custom
 QCD_Pt_X_X_5020GeV_TuneCUETP8M1_cfi_GEN_SIM_PU_DIGIRAW/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_PU_*

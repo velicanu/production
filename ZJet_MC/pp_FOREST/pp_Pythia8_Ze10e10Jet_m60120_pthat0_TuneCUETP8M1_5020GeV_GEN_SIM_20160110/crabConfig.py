@@ -2,7 +2,7 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 config.section_('General')
 config.General.transferOutputs = True
-config.General.requestName = 'pp_Pythia8_Ze10e10Jet_m60120_pthat0_TuneCUETP8M1_5020GeV_GEN_SIM_20160110_FOREST_v24'
+config.General.requestName = 'pp_Pythia8_Ze10e10Jet_m60120_pthat0_TuneCUETP8M1_5020GeV_GEN_SIM_20160110_FOREST_v30'
 config.section_('JobType')
 config.JobType.psetName = 'runForestAOD_pp_MC_75X.py'
 # config.JobType.maxMemoryMB = 3000 #default 2000
@@ -15,7 +15,7 @@ config.Data.splitting = "FileBased"
 config.Data.unitsPerJob = 5
 config.Data.totalUnits = -1
 config.Data.publication = False
-config.Data.outputDatasetTag = 'pp_Pythia8_Ze10e10Jet_m60120_pthat0_TuneCUETP8M1_5020GeV_GEN_SIM_20160110_FOREST_v24'
+config.Data.outputDatasetTag = 'pp_Pythia8_Ze10e10Jet_m60120_pthat0_TuneCUETP8M1_5020GeV_GEN_SIM_20160110_FOREST_v30'
 config.section_('User')
 config.section_('Site')
 config.Site.whitelist = ['T2_US_MIT']

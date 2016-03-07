@@ -26,8 +26,7 @@ process.HiForest.HiForestVersion = cms.string(version)
 process.source = cms.Source("PoolSource",
                             duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
                             fileNames = cms.untracked.vstring(
-        #                                "file:/afs/cern.ch/work/r/richard/public/PbPb_RECODEBUG.root",
-        "file:step3_hi_mc.root",
+                                "file:samples/PbPb_MC_RECODEBUG.root"
                                 )
                             )
 
@@ -75,9 +74,15 @@ process.TFileService = cms.Service("TFileService",
 #############################
 # Jets
 #############################
-process.load('HeavyIonsAnalysis.JetAnalysis.FullJetSequence_nominalPbPb')
+# full gen jets followed by filters to select signal-only genjets
+process.load('HeavyIonsAnalysis.JetAnalysis.GenJetSequence')
+process.load('HeavyIonsAnalysis.JetAnalysis.hiSignalGenFilters')
 
-# Use this one for JEC:
+
+# nominal jet reco sequence
+process.load('HeavyIonsAnalysis.JetAnalysis.FullJetSequence_nominalPbPb')
+process.myPartons.src = 'hiSignalGenParticles'
+# replace above with this one for JEC:
 #process.load('HeavyIonsAnalysis.JetAnalysis.FullJetSequence_JECPbPb')
 
 ####################################################################################
@@ -152,6 +157,8 @@ process.ana_step = cms.Path(
                             process.centralityBin *
                             process.hiEvtAnalyzer*
                             process.HiGenParticleAna*
+                            process.akHiGenJets +
+                            process.hiSignalGenFilters + 
                             process.jetSequences +
                             process.ggHiNtuplizer +
                             process.ggHiNtuplizerGED +
